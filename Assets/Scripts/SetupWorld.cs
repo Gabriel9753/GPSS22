@@ -23,10 +23,4 @@ public class SetupWorld : MonoBehaviour
         //player.GetComponent<PlayerMovement>().camera = camera;
 
     }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
 }

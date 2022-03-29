@@ -10,15 +10,18 @@ public class PlayerAttack : MonoBehaviour
     public float health = 100.0f;
 
 
+    //Fields
     private Animator animator;
-    
     public GameObject rArm;
+    
+    //For later initializing
     private BoxCollider weaponCollider;
 
+    
     // Called when a script is enabled
     void Start()
     {
-
+        //Get collider from held weapon
         weaponCollider = rArm.GetComponentInChildren<BoxCollider>();
         animator = GetComponent<Animator>();
     }
@@ -26,21 +29,22 @@ public class PlayerAttack : MonoBehaviour
     // Called once every frame
     void Update()
     {
+        //Right click for attack animation
         if (Input.GetMouseButtonDown(1) && this.name == "Player"){animator.SetBool("isNormalAttack", true);}
         else {animator.SetBool("isNormalAttack", false);}
 
+        //If collider of weapon is triggered, it sets the boolean get 'isOterPlayerHit' on true!
         if (Weapon.isOtherPlayerHit)
         {
+            //Get Object hit
             GameObject enemy = Weapon.getHitObject();
-            if (enemy)
-            {
-                doDamage(enemy);
-            }
+            if(enemy) doDamage(enemy);
             Weapon.setHitObjectNull();
         }
 
         if (health <= 0)
         {
+            //TODO: Die
             Destroy(gameObject);
         }
     }
@@ -50,7 +54,6 @@ public class PlayerAttack : MonoBehaviour
         float enemiesHealth = target.GetComponent<PlayerAttack>().getHealth();
         target.GetComponent<PlayerAttack>().setHealth(enemiesHealth-5);
         target.GetComponent<PlayerAttack>().animator.Play("Hit", 0, 0.0f);
-        Debug.Log(target.GetComponent<PlayerAttack>().getHealth());
     }
 
    

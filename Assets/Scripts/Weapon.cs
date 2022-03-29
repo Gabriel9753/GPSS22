@@ -9,12 +9,11 @@ public class Weapon : MonoBehaviour
     private static GameObject hitObject;
     private void OnTriggerEnter(Collider other)
     {
-        if (other.CompareTag("Player") && isOtherPlayerHit == false)
+        if (other.CompareTag("Enemy") && isOtherPlayerHit == false)
         {
             isOtherPlayerHit = true;
             hitObject = other.gameObject;
         }
-
     }
 
     public static GameObject getHitObject()
