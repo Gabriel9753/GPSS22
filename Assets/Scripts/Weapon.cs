@@ -1,0 +1,34 @@
+using System;
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+
+public class Weapon : MonoBehaviour
+{
+    public static bool isOtherPlayerHit = false;
+    private static GameObject hitObject;
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.CompareTag("Player") && isOtherPlayerHit == false)
+        {
+            Debug.Log("COLLIDER_COLLIDER");
+            isOtherPlayerHit = true;
+            hitObject = other.gameObject;
+        }
+
+    }
+
+    private void OnTriggerExit(Collider other)
+    {
+        isOtherPlayerHit = false;
+    }
+
+    public static GameObject getHitObject()
+    {
+        return hitObject;
+    }
+    public static void setHitObjectNull()
+    {
+        hitObject = null;
+    }
+}

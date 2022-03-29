@@ -44,7 +44,7 @@ public class PlayerMovement : MonoBehaviour
             }
         }
         
-        if (Vector3.Distance(destination, transform.position) < 1f)
+        if (Vector3.Distance(destination, transform.position) < 0.1f)
         {
             animator.SetBool("isRunning", false);
         }
