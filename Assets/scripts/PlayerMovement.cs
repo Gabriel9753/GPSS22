@@ -38,10 +38,19 @@ public class PlayerMovement : MonoBehaviour
 
             if (Physics.Raycast(ray, out hit, maxDistance, moveMask))
             {
+                agent.speed = 9;
+                animator.SetBool("isRolling", false);
                 animator.SetBool("isRunning", true);
                 destination = agent.destination;
                 agent.SetDestination(hit.point);
             }
+        }
+
+        if (Input.GetKeyDown("space"))
+        {
+            animator.Play("Rolling");
+            animator.SetBool("isRolling", true);
+            agent.speed = 5;
         }
         
         if (Vector3.Distance(destination, transform.position) < 0.1f)
