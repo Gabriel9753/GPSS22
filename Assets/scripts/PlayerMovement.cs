@@ -2,6 +2,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
+using UnityEngine.UI;
+
 //ilyi says hello
 public class PlayerMovement : MonoBehaviour
 {
@@ -16,6 +18,8 @@ public class PlayerMovement : MonoBehaviour
     private RaycastHit hit;
     public int maxDistance = 70;
     private Vector3 destination;
+
+    public LayerMask moveMask;
 
     // Called when a script is enabled
     void Start()
@@ -32,14 +36,11 @@ public class PlayerMovement : MonoBehaviour
         {
             Ray ray = camera.ScreenPointToRay(Input.mousePosition);
 
-            if (Physics.Raycast(ray, out hit, maxDistance))
+            if (Physics.Raycast(ray, out hit, maxDistance, moveMask))
             {
-                if (hit.collider.CompareTag(groundTag))
-                {
-                    animator.SetBool("isRunning", true);
-                    destination = agent.destination;
-                    agent.SetDestination(hit.point);
-                }
+                animator.SetBool("isRunning", true);
+                destination = agent.destination;
+                agent.SetDestination(hit.point);
             }
         }
         

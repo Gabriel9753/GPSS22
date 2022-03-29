@@ -8,7 +8,7 @@ public class teleport : MonoBehaviour
     public GameObject[] otherTeleporters;
     private void OnTriggerEnter(Collider other)
     {
-        if (other.tag != "Ground")
+        if (other.tag == "Player")
         {
             GameObject otherT = otherTeleporters[0];
             other.transform.position = otherT.transform.position;
