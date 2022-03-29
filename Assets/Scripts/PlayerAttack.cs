@@ -18,6 +18,7 @@ public class PlayerAttack : MonoBehaviour
     // Called when a script is enabled
     void Start()
     {
+
         weaponCollider = rArm.GetComponentInChildren<BoxCollider>();
         animator = GetComponent<Animator>();
     }
@@ -25,7 +26,6 @@ public class PlayerAttack : MonoBehaviour
     // Called once every frame
     void Update()
     {
-        
         if (Input.GetMouseButtonDown(1) && this.name == "Player"){animator.SetBool("isNormalAttack", true);}
         else {animator.SetBool("isNormalAttack", false);}
 
@@ -38,12 +38,18 @@ public class PlayerAttack : MonoBehaviour
             }
             Weapon.setHitObjectNull();
         }
+
+        if (health <= 0)
+        {
+            Destroy(gameObject);
+        }
     }
     
     void doDamage(GameObject target)
     {
         float enemiesHealth = target.GetComponent<PlayerAttack>().getHealth();
         target.GetComponent<PlayerAttack>().setHealth(enemiesHealth-5);
+        target.GetComponent<PlayerAttack>().animator.Play("Hit", 0, 0.0f);
         Debug.Log(target.GetComponent<PlayerAttack>().getHealth());
     }
 
@@ -58,6 +64,8 @@ public class PlayerAttack : MonoBehaviour
     void endAttack()
     {
         weaponCollider.enabled = false;
+        Weapon.setHitObjectNull();
+        Weapon.isOtherPlayerHit = false;
     }
     
     //Getter and Setter

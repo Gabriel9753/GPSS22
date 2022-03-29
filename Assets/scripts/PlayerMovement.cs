@@ -8,7 +8,7 @@ using UnityEngine.UI;
 public class PlayerMovement : MonoBehaviour
 {
     [SerializeField]
-    private new Camera camera;
+    public new Camera camera;
 
     private string groundTag = "Ground";
 

@@ -11,16 +11,10 @@ public class Weapon : MonoBehaviour
     {
         if (other.CompareTag("Player") && isOtherPlayerHit == false)
         {
-            Debug.Log("COLLIDER_COLLIDER");
             isOtherPlayerHit = true;
             hitObject = other.gameObject;
         }
 
-    }
-
-    private void OnTriggerExit(Collider other)
-    {
-        isOtherPlayerHit = false;
     }
 
     public static GameObject getHitObject()
