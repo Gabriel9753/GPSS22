@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class SetupWorld : MonoBehaviour
 {
-    public GameObject player;
+    //public GameObject player;
 
     public GameObject[] enemies;
 
@@ -12,7 +12,7 @@ public class SetupWorld : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        Instantiate(player);
+       // Instantiate(player);
         for (int i = 0; i < enemies.Length; i++)
         {
             Instantiate(enemies[i]);
