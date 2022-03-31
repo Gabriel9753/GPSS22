@@ -959,6 +959,7 @@ GameObject:
   - component: {fileID: 1987404107}
   - component: {fileID: 8547376925413670056}
   - component: {fileID: 3706097481826340632}
+  - component: {fileID: -4331071610197714268}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -1160,6 +1161,19 @@ MonoBehaviour:
   health: 70
   mana: 0
   maxMana: 0
+--- !u!114 &-4331071610197714268
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2386370963707241840}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5d03cecb27a80214c892c7c98b1339d0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  comboStep: 0
 --- !u!1 &2386394569162594766
 GameObject:
   m_ObjectHideFlags: 0

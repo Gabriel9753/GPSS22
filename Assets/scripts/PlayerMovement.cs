@@ -8,7 +8,7 @@ using UnityEngine.AI;
 public class PlayerMovement : MonoBehaviour
 {
     private Camera camera;
-    private static NavMeshAgent agent;
+    public static NavMeshAgent agent;
     private RaycastHit hit;
     public static Animator animator;
     public int maxDistance = 70;
@@ -29,7 +29,7 @@ public class PlayerMovement : MonoBehaviour
     // Called once every frame
     void Update()
     {
-        if (!animator.GetCurrentAnimatorStateInfo(0).IsName("Rolling"))
+        if (!Player.instance.isRolling() && !Player.instance.isAttacking())
         {
             if (Input.GetMouseButton(0))
             {
@@ -46,7 +46,7 @@ public class PlayerMovement : MonoBehaviour
                 }
             }
             //Rolling
-            if (Input.GetKeyDown("space") && !PlayerAttack.isAttacking())
+            if (Input.GetKeyDown("space") && !Player.instance.isAttacking())
             {
                 float alpha = (float)((transform.rotation.eulerAngles.y % 360) * Math.PI)/180;
                 Vector3 forward = new Vector3((float)Math.Sin(alpha), 0, (float)Math.Cos(alpha));
@@ -62,6 +62,10 @@ public class PlayerMovement : MonoBehaviour
                 agent.speed = walkSpeed;
                 animator.SetBool("isRunning", false);
             }
+        }
+
+        if (Player.instance.isAttacking()){
+            agent.ResetPath();
         }
 
     }

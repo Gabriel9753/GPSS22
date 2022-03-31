@@ -11,35 +11,30 @@ public class PlayerAttack : MonoBehaviour
     //For later initializing
     public GameObject weapon;
     private BoxCollider _boxCollider;
-    private static Animator _animator;
     
     // Called when a script is enabled
     void Start()
     {
         //Get collider from held weapon
         _boxCollider = weapon.GetComponent<BoxCollider>();
-        _animator = Player.instance.GetComponent<Animator>();
     }
     
     // Called once every frame
     void Update()
     {
-        //Right click for attack animation
-        if (Input.GetMouseButtonDown(1)){_animator.SetBool("isNormalAttack", true);}
-        else {_animator.SetBool("isNormalAttack", false);}
-
-    }
-    public static bool isAttacking(){
-        if (_animator.GetCurrentAnimatorStateInfo(0).IsName("SlashAttack")){
-            return true;
+        //Right click for attack animation and not running
+        if (Input.GetMouseButtonDown(1) && !Player.instance.isRunning()){
+            Player.instance.GetComponent<PlayerCombo>().NormalAttack();
         }
 
-        if (_animator.GetCurrentAnimatorStateInfo(1).IsName("SlashAttack")){
-            return true;
-        }
         
-        return false;
+            //When running other attack animation
+        if (Input.GetMouseButtonDown(1) && Player.instance.isRunning()){
+            PlayerMovement.agent.ResetPath();
+            //Dash Attack
+        }
     }
+
 
     public void startAttack()
     {
