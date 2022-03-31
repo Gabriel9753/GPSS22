@@ -23,13 +23,25 @@ public class CameraFollow : MonoBehaviour
 
 
     private void Start(){
+        Debug.Log("Kamera");
         targetZoom = currentZoom;
+        target = Player.instance.transform;
     }
 
     void Update () {
         Vector3 goalPos = target.position + offset;
         transform.position = Vector3.SmoothDamp (transform.position, goalPos, ref velocity, smoothTime);
+        float scroll = Input.GetAxisRaw("Mouse ScrollWheel") * zoomSensitivity;
 
+        if (scroll != 0f)
+        {
+            targetZoom = Mathf.Clamp(targetZoom - scroll, minZoom, maxZoom);
+        }
+        currentZoom = Mathf.SmoothDamp (currentZoom, targetZoom, ref zoomSmoothV, .15f);
+    }
+
+    void LateUpdate () {
+        gameObject.GetComponent<Camera>().orthographicSize = currentZoom;
     }
 
 }

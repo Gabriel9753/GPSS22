@@ -7,10 +7,10 @@ using UnityEngine.AI;
 
 public class PlayerMovement : MonoBehaviour
 {
-    [SerializeField] private new Camera camera;
+    private Camera camera;
     private static NavMeshAgent agent;
     private RaycastHit hit;
-    private static Animator animator;
+    public static Animator animator;
     public int maxDistance = 70;
     private Vector3 destination;
     public LayerMask moveMask;
@@ -19,8 +19,9 @@ public class PlayerMovement : MonoBehaviour
     public float walkSpeed = 8.0f;
 
     // Called when a script is enabled
-    void Awake()
+    void Start()
     {
+        Debug.Log("Player Movement");
         animator = GetComponent<Animator>();
         agent = GetComponent<NavMeshAgent>();
     }
@@ -36,6 +37,7 @@ public class PlayerMovement : MonoBehaviour
 
                 if (Physics.Raycast(ray, out hit, maxDistance, moveMask))
                 {
+                    Debug.Log("HIT " + hit.transform.position);
                     agent.speed = walkSpeed;
                     animator.SetBool("isRolling", false);
                     animator.SetBool("isRunning", true);
@@ -44,7 +46,7 @@ public class PlayerMovement : MonoBehaviour
                 }
             }
             //Rolling
-            if (Input.GetKeyDown("space"))
+            if (Input.GetKeyDown("space") && !PlayerAttack.isAttacking())
             {
                 float alpha = (float)((transform.rotation.eulerAngles.y % 360) * Math.PI)/180;
                 Vector3 forward = new Vector3((float)Math.Sin(alpha), 0, (float)Math.Cos(alpha));
@@ -55,7 +57,7 @@ public class PlayerMovement : MonoBehaviour
                 animator.Play("Rolling");
                 animator.SetBool("isRolling", true);
             }
-            if (Vector3.Distance(destination, transform.position) < 0.1f)
+            if (Vector3.Distance(destination, transform.position) == 0)
             {
                 agent.speed = walkSpeed;
                 animator.SetBool("isRunning", false);
@@ -70,5 +72,9 @@ public class PlayerMovement : MonoBehaviour
         agent.Warp(new Vector3(0.7f,0.3f,2.1f));
         animator.SetBool("isRunning", false);
         
+    }
+
+    public void setCamera(Camera camera){
+        this.camera = camera;
     }
 }

@@ -9,23 +9,29 @@ public class SetupWorld : MonoBehaviour
     //public GameObject player;
     public static WorldManager worldManager;
     public GameObject[] enemies;
+    public GameObject player;
     
     public static GameObject newRoom;
-    //public Camera camera;
+    public new Camera camera;
     // Start is called before the first frame update
-    void Start()
+    void Awake()
     {
        // Instantiate(player);
         for (int i = 0; i < enemies.Length; i++)
         {
             Instantiate(enemies[i]);
         }
-        //Instantiate(world manager);
+        Debug.Log("Setup");
+        Instantiate(player);
+        Player.instance.GetComponent<PlayerMovement>().setCamera(camera);
+        camera.GetComponent<CameraFollow>().target = Player.instance.transform;
         worldManager = gameObject.GetComponent<WorldManager>();
         //Instantiate(camera);
         //camera.GetComponent<CameraFollow>().target = player.transform;
         //player.GetComponent<PlayerMovement>().camera = camera;
 
     }
+    
+    
     
 }
