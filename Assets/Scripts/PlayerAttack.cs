@@ -9,14 +9,15 @@ public class PlayerAttack : MonoBehaviour
     public GameObject rArm;
 
     //For later initializing
-    private BoxCollider weaponCollider;
+    public GameObject weapon;
+    private BoxCollider _boxCollider;
     private static Animator _animator;
     
     // Called when a script is enabled
     void Start()
     {
         //Get collider from held weapon
-        weaponCollider = rArm.GetComponentInChildren<BoxCollider>();
+        _boxCollider = weapon.GetComponent<BoxCollider>();
         _animator = Player.instance.GetComponent<Animator>();
     }
     
@@ -28,20 +29,6 @@ public class PlayerAttack : MonoBehaviour
         else {_animator.SetBool("isNormalAttack", false);}
 
     }
-
-    //Activate collider while attacking
-    void startAttack()
-    {
-        weaponCollider.enabled = true;
-    }
-
-    void endAttack()
-    {
-        weaponCollider.enabled = false;
-        Weapon.setHitObjectNull();
-        Weapon.isOtherPlayerHit = false;
-    }
-
     public static bool isAttacking(){
         if (_animator.GetCurrentAnimatorStateInfo(0).IsName("SlashAttack")){
             return true;
@@ -54,6 +41,15 @@ public class PlayerAttack : MonoBehaviour
         return false;
     }
 
+    public void startAttack()
+    {
+        _boxCollider.enabled = true;
+    }
+
+    public void endAttack()
+    {
+        _boxCollider.enabled = false;
+    }
 
 
 }

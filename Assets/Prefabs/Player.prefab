@@ -958,6 +958,7 @@ GameObject:
   - component: {fileID: 2386263611798999735}
   - component: {fileID: 1987404107}
   - component: {fileID: 8547376925413670056}
+  - component: {fileID: 3706097481826340632}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -1045,8 +1046,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0932fa9d15f12be4aaa4681888183307, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  health: 120
   rArm: {fileID: 2384868906043835600}
+  weapon: {fileID: 1413073978961300902}
 --- !u!195 &2386263611798999752
 NavMeshAgent:
   m_ObjectHideFlags: 0
@@ -1143,6 +1144,22 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b1651660f7f75684996b2e424964a83b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &3706097481826340632
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2386370963707241840}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 34d74c24cbe95234789321009526d0c6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  maxHealth: 0
+  health: 70
+  mana: 0
+  maxMana: 0
 --- !u!1 &2386394569162594766
 GameObject:
   m_ObjectHideFlags: 0
@@ -1384,7 +1401,7 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 0.4671147, y: 1.8165451, z: 0.2893576}
   m_Center: {x: -0.0007411045, y: 0.6486717, z: -0.00022036236}
---- !u!114 &267541496505059060
+--- !u!114 &596698946310129801
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -1393,6 +1410,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 1413073978961300902}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 19cbc20fce91b124d8655f75514fce63, type: 3}
+  m_Script: {fileID: 11500000, guid: 82a53c0adafb8b94395aba32321eb6f9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  weaponDamage: 10

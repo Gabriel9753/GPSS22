@@ -10,8 +10,11 @@ public class EnemyMovement : MonoBehaviour
     Transform target;
     NavMeshAgent agent;
     private Animator _animator;
+    public GameObject weapon;
+    private BoxCollider _boxCollider;
     
     void Start(){
+        _boxCollider = weapon.GetComponent<BoxCollider>();
         agent = GetComponent<NavMeshAgent>();
         target = Player.instance.transform;
         _animator = GetComponent<Animator>();
@@ -52,5 +55,16 @@ public class EnemyMovement : MonoBehaviour
     void OnDrawGizmosSelected (){
         Gizmos.color = Color.red;
         Gizmos.DrawWireSphere(transform.position, lookRadius);
+    }
+    
+    
+    public void startAttack()
+    {
+        _boxCollider.enabled = true;
+    }
+
+    public void endAttack()
+    {
+        _boxCollider.enabled = false;
     }
 }
