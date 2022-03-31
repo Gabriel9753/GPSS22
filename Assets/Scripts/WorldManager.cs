@@ -14,7 +14,8 @@ public class WorldManager : MonoBehaviour
     void Start()
     {
         newRoom = Instantiate(entryRoom, position: new Vector3(0,0, 0), Quaternion.identity);
-        Vector3 position = newRoom.transform.Find("entrance").gameObject.transform.position; 
+        Vector3 position = newRoom.transform.Find("Entrance").gameObject.transform.position; 
+        Debug.Log(position);
         PlayerMovement.Warp(position);
     }
 
@@ -33,7 +34,7 @@ public class WorldManager : MonoBehaviour
         for (int i = 0; i < surfaces.Length; i++){
             surfaces[i].BuildNavMesh();
         }
-        Vector3 newPosition = newRoom.transform.Find("entrance").gameObject.transform.position;
+        Vector3 newPosition = newRoom.transform.Find("Entrance").gameObject.transform.position;
         roomCounter++;
         PlayerMovement.Warp(newPosition);
     }

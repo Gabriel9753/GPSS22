@@ -15,16 +15,21 @@ public class PlayerMovement : MonoBehaviour
     private Vector3 destination;
     public LayerMask moveMask;
     private static GameObject player;
+    
 
     // Called when a script is enabled
     void Start()
+    {
+    }
+
+    // Called once every frame
+    
+    void Awake()
     {
         animator = GetComponent<Animator>();
         agent = GetComponent<NavMeshAgent>();
         player = gameObject;
     }
-
-    // Called once every frame
     void Update()
     {
         if (Input.GetMouseButton(0))
@@ -33,7 +38,6 @@ public class PlayerMovement : MonoBehaviour
 
             if (Physics.Raycast(ray, out hit, maxDistance, moveMask))
             {
-                agent.speed = 9;
                 animator.SetBool("isRolling", false);
                 animator.SetBool("isRunning", true);
                 destination = agent.destination;
@@ -45,7 +49,6 @@ public class PlayerMovement : MonoBehaviour
         {
             animator.Play("Rolling");
             animator.SetBool("isRolling", true);
-            agent.speed = 5;
         }
 
         if (Vector3.Distance(destination, transform.position) < 0.1f)
@@ -56,8 +59,7 @@ public class PlayerMovement : MonoBehaviour
 
     public static void Warp(Vector3 newPosition)
     {
-        Debug.Log("Position: "+newPosition);
-        agent.Warp(new Vector3(0.7f,0.3f,2.1f));
+        agent.Warp(newPosition);
         animator.SetBool("isRunning", false);
         
     }

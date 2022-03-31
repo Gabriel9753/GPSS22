@@ -7,6 +7,8 @@ TagManager:
   - Ground
   - weapon
   - Enemy
+  - Exit
+  - Entrance
   layers:
   - Default
   - TransparentFX
@@ -14,7 +16,7 @@ TagManager:
   - Ground
   - Water
   - UI
-  - 
+  - Background Image
   - 
   - 
   - 
