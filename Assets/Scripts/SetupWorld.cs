@@ -13,8 +13,7 @@ public class SetupWorld : MonoBehaviour
     public static GameObject newRoom;
     //public Camera camera;
     // Start is called before the first frame update
-    void Start()
-    {
+    void Awake(){
        // Instantiate(player);
         for (int i = 0; i < enemies.Length; i++)
         {

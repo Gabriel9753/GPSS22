@@ -3,25 +3,34 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Weapon : MonoBehaviour
-{
-    public static bool isOtherPlayerHit = false;
-    private static GameObject hitObject;
-    private void OnTriggerEnter(Collider other)
-    {
-        if (other.CompareTag("Enemy") && isOtherPlayerHit == false)
-        {
-            isOtherPlayerHit = true;
-            hitObject = other.gameObject;
-        }
+public class Weapon : MonoBehaviour{
+    public float weaponDamage = 10;
+    private BoxCollider weaponCollider;
+
+    private void Start(){
+        weaponCollider = GetComponent<BoxCollider>();
     }
 
-    public static GameObject getHitObject()
-    {
-        return hitObject;
+    private void OnTriggerEnter(Collider other){
+        if (other.CompareTag("Enemy")){
+            
+        }
+        if (other.CompareTag("Player")){
+            PlayerStats.Instance.TakeDamage(weaponDamage);
+        }
+        
     }
-    public static void setHitObjectNull()
+    void startAttack()
     {
-        hitObject = null;
+        weaponCollider.enabled = true;
     }
+
+    void endAttack()
+    {
+        weaponCollider.enabled = false;
+    }
+    
+
 }
+
+

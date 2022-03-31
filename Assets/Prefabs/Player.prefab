@@ -953,10 +953,9 @@ GameObject:
   - component: {fileID: 2328194144918870242}
   - component: {fileID: 2386263611798999753}
   - component: {fileID: 2386263611798999734}
-  - component: {fileID: 2386263611798999757}
   - component: {fileID: 2386263611798999752}
   - component: {fileID: 2386263611798999735}
-  - component: {fileID: 1987404107}
+  - component: {fileID: 1287820339163267676}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -1032,20 +1031,6 @@ CapsuleCollider:
   m_Height: 3.95
   m_Direction: 1
   m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &2386263611798999757
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2386370963707241840}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0932fa9d15f12be4aaa4681888183307, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  health: 120
-  rArm: {fileID: 2384868906043835600}
 --- !u!195 &2386263611798999752
 NavMeshAgent:
   m_ObjectHideFlags: 0
@@ -1112,7 +1097,7 @@ MonoBehaviour:
   - {fileID: 2383486810993738134}
   - {fileID: 2383486461961463616}
   - {fileID: 2381428348822769266}
---- !u!114 &1987404107
+--- !u!114 &1287820339163267676
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -1128,7 +1113,7 @@ MonoBehaviour:
   maxDistance: 70
   moveMask:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 8
 --- !u!1 &2386394569162594766
 GameObject:
   m_ObjectHideFlags: 0
@@ -1370,3 +1355,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 19cbc20fce91b124d8655f75514fce63, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  healthSystem: {fileID: 0}
+  weaponDamage: 0

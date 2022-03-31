@@ -20,6 +20,7 @@ public class PlayerMovement : MonoBehaviour
     // Called when a script is enabled
     void Start()
     {
+        
     }
 
     // Called once every frame
@@ -55,6 +56,8 @@ public class PlayerMovement : MonoBehaviour
         {
             animator.SetBool("isRunning", false);
         }
+        
+
     }
 
     public static void Warp(Vector3 newPosition)
