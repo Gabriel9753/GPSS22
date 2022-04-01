@@ -127,7 +127,6 @@ public class HealthSystemGUI : MonoBehaviour
 		UpdateGraphics();
 	}
 	public void SetMaxHealth(float input){
-		Debug.Log("HEALTH");
 		maxHealth = input;
 
 		UpdateGraphics();
@@ -205,7 +204,7 @@ public class HealthSystemGUI : MonoBehaviour
 	{
 		// Player gets hurt. Do stuff.. play anim, sound..
 
-		PopupText.Instance.Popup("Ouch!", 1f, 1f); // Demo stuff!
+		//PopupText.Instance.Popup("Ouch!", 1f, 1f); // Demo stuff!
 
 		if (health < 1) // Health is Zero!!
 		{
@@ -222,7 +221,7 @@ public class HealthSystemGUI : MonoBehaviour
 	IEnumerator PlayerDied()
 	{
 		// Player is dead. Do stuff.. play anim, sound..
-		PopupText.Instance.Popup("You have died!", 1f, 1f); // Demo stuff!
+		//PopupText.Instance.Popup("You have died!", 1f, 1f); // Demo stuff!
 
 		yield return null;
 	}

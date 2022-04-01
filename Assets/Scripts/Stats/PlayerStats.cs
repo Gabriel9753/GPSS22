@@ -27,8 +27,7 @@ public class PlayerStats : MonoBehaviour{
     }
 
     public void Start(){
-        health = 10;
-        maxHealth = 100;
+        maxHealth = 240;
         mana = 100;
         maxMana = 100;
         HealthSystemGUI.Instance.SetHealth(health);

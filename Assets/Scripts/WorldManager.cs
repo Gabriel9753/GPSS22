@@ -5,17 +5,18 @@ using UnityEngine.AI;
 
 public class WorldManager : MonoBehaviour
 {    
-    public GameObject newRoom;
+    private GameObject newRoom;
     public NavMeshSurface[] surfaces;
     public GameObject[] rooms;
     public GameObject entryRoom;
+    private GameObject entrance;
     private int roomCounter= 0;
     // Start is called before the first frame update
     void Start()
     {
         newRoom = Instantiate(entryRoom, position: new Vector3(0,0, 0), Quaternion.identity);
-        Vector3 position = newRoom.transform.Find("Entrance").gameObject.transform.position; 
-        Debug.Log(position);
+        entrance = GameObject.FindWithTag("Entrance");
+        Vector3 position = entrance.transform.position;
         PlayerMovement.Warp(position);
     }
 
@@ -34,8 +35,9 @@ public class WorldManager : MonoBehaviour
         for (int i = 0; i < surfaces.Length; i++){
             surfaces[i].BuildNavMesh();
         }
-        Vector3 newPosition = newRoom.transform.Find("Entrance").gameObject.transform.position;
+        entrance = GameObject.FindWithTag("Entrance");
+        Vector3 position = entrance.transform.position;
         roomCounter++;
-        PlayerMovement.Warp(newPosition);
+        PlayerMovement.Warp(position);
     }
 }
