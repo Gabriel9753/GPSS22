@@ -65,7 +65,7 @@ Camera:
   m_CullingMask:
     serializedVersion: 2
     m_Bits: 4294967295
-  m_RenderingPath: 3
+  m_RenderingPath: 1
   m_TargetTexture: {fileID: 0}
   m_TargetDisplay: 0
   m_TargetEye: 3
@@ -96,6 +96,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 280789e36b2c6ae47ae7546e9294dd2a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  target: {fileID: 2383472873507441982, guid: 29c8da263c553354e9a9d8d3ef96e9f1, type: 3}
-  smoothTime: 0.05
+  target: {fileID: 0}
+  smoothTime: 0.1
   offset: {x: -20, y: 18, z: -20}
+  smoothSpeed: 2
+  currentZoom: 7.9999995
+  maxZoom: 8
+  minZoom: 3
+  zoomSensitivity: 5

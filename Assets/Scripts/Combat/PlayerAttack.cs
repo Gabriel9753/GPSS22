@@ -30,7 +30,6 @@ public class PlayerAttack : MonoBehaviour
         
             //When running other attack animation
         if (Input.GetMouseButtonDown(1) && Player.instance.isRunning()){
-            PlayerMovement.agent.ResetPath();
             //Dash Attack
         }
     }
