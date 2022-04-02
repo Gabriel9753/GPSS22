@@ -4,37 +4,24 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-/*
-	This component is derived from CharacterStats. It adds two things:
-		- Gaining modifiers when equipping items
-		- Restarting the game when dying
-*/
-
 public class PlayerStats : MonoBehaviour{
     
-    public static PlayerStats Instance;
-    
-    public float maxHealth;			// Maximum amount of health
-    public float health;	// Current amount of health
-    public float mana;
-    public float maxMana;
-    // Use this for initialization
-    
-    
-
-    public void Awake(){
-        Instance = this;
-    }
+    public float maxHealth = 200;   // Maximum amount of health
+    public float maxMana = 200;
+    public float health = 100;	// Current amount of health
+    public float mana = 100;
+    private static bool called = false;
+    public GameObject healthUI;
 
     public void Start(){
-        maxHealth = 240;
-        mana = 100;
-        maxMana = 100;
-        HealthSystemGUI.Instance.SetHealth(health);
-        HealthSystemGUI.Instance.SetMaxHealth(maxHealth);
-        HealthSystemGUI.Instance.SetMana(mana);
-        HealthSystemGUI.Instance.SetMaxMana(maxMana);
+        HealthSystemGUI.Instance.maxHealth = 112;
+        HealthSystemGUI.Instance.health = 112;
+        HealthSystemGUI.Instance.maxMana = 112;
+        HealthSystemGUI.Instance.mana = 112;
         
+    }
+
+    public void Update(){
         
     }
 
@@ -61,8 +48,7 @@ public class PlayerStats : MonoBehaviour{
             health = 100;
         }
         HealthSystemGUI.Instance.HealDamage(amount);
-
     }
-    
-    
+
+
 }

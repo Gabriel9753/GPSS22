@@ -5,10 +5,9 @@ using System.Linq;
 using UnityEngine;
 using UnityEngine.AI;
 
-public class PlayerMovement : MonoBehaviour
-{
+public class PlayerMovement : MonoBehaviour{
     private Camera camera;
-    public static NavMeshAgent agent;
+    public NavMeshAgent agent;
     private RaycastHit hit;
     public static Animator animator;
     public int maxDistance = 70;
@@ -19,25 +18,17 @@ public class PlayerMovement : MonoBehaviour
     public float walkSpeed = 8.0f;
 
     // Called when a script is enabled
-    void Start()
-    {
-        Debug.Log("Player Movement");
+    void Start(){
         animator = GetComponent<Animator>();
         agent = GetComponent<NavMeshAgent>();
     }
 
     // Called once every frame
-    void Update()
-    {
-        if (!Player.instance.isRolling() && !Player.instance.isAttacking())
-        {
-            if (Input.GetMouseButton(0))
-            {
+    void Update(){
+        if (!Player.instance.isRolling() && !Player.instance.isAttacking()){
+            if (Input.GetMouseButton(0)){
                 Ray ray = camera.ScreenPointToRay(Input.mousePosition);
-
-                if (Physics.Raycast(ray, out hit, maxDistance, moveMask))
-                {
-                    Debug.Log("HIT " + hit.transform.position);
+                if (Physics.Raycast(ray, out hit, maxDistance, moveMask)){
                     agent.speed = walkSpeed;
                     animator.SetBool("isRolling", false);
                     animator.SetBool("isRunning", true);
@@ -46,8 +37,7 @@ public class PlayerMovement : MonoBehaviour
                 }
             }
             //Rolling
-            if (Input.GetKeyDown("space") && !Player.instance.isAttacking())
-            {
+            if (Input.GetKeyDown("space") && !Player.instance.isAttacking()){
                 float alpha = (float)((transform.rotation.eulerAngles.y % 360) * Math.PI)/180;
                 Vector3 forward = new Vector3((float)Math.Sin(alpha), 0, (float)Math.Cos(alpha));
                 Vector3 newDestination = transform.position + forward * (rollSpeed+3.1f);
@@ -57,25 +47,21 @@ public class PlayerMovement : MonoBehaviour
                 animator.Play("Rolling");
                 animator.SetBool("isRolling", true);
             }
-            if (Vector3.Distance(destination, transform.position) == 0)
-            {
+            if (Vector3.Distance(destination, transform.position) == 0){
                 agent.speed = walkSpeed;
                 animator.SetBool("isRunning", false);
             }
         }
-
         if (Player.instance.isAttacking()){
             agent.ResetPath();
         }
 
     }
 
-    public static void Warp(Vector3 newPosition)
-    {
-        Debug.Log("Position: "+newPosition);
-        agent.Warp(new Vector3(0.7f,0.3f,2.1f));
+    public void Warp(Vector3 newPosition){
+        Debug.Log("Position: "+newPosition+" and agent: " + agent);
+        agent.Warp(newPosition);
         animator.SetBool("isRunning", false);
-        
     }
 
     public void setCamera(Camera camera){

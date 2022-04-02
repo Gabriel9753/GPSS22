@@ -127,28 +127,31 @@ public class HealthSystemGUI : MonoBehaviour
 		UpdateGraphics();
 	}
 	public void SetMaxHealth(float input){
-		Debug.Log("HEALTH");
 		maxHealth = input;
 
-		UpdateGraphics();
+		UpdateHealthBar();
+		UpdateHealthGlobe();
 	}
 	
 	public void SetHealth(float input){
 		health = input;
 
-		UpdateGraphics();
+		UpdateHealthBar();
+		UpdateHealthGlobe();
 	}
 	
 	public void SetMana(float input){
 		mana = input;
 
-		UpdateGraphics();
+		UpdateManaBar();
+		UpdateManaGlobe();
 	}
 	
 	public void SetMaxMana(float input){
 		maxMana = input;
 
-		UpdateGraphics();
+		UpdateManaBar();
+		UpdateManaGlobe();
 	}
 
 	//==============================================================
@@ -163,9 +166,11 @@ public class HealthSystemGUI : MonoBehaviour
 
 	private void UpdateManaGlobe()
 	{
+
 		float ratio = mana / maxMana;
 		currentManaGlobe.rectTransform.localPosition = new Vector3(0, currentManaGlobe.rectTransform.rect.height * ratio - currentManaGlobe.rectTransform.rect.height, 0);
 		manaText.text = mana.ToString("0") + "/" + maxMana.ToString("0");
+
 	}
 
 	public void UseMana(float Mana)

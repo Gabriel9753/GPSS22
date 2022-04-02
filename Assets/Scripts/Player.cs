@@ -27,7 +27,9 @@ public class Player : MonoBehaviour{
     void Die() {
        // SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
     }
-    
+
+    #region Check animation states from player
+
     public bool isAttacking(){
         if (_animator.GetCurrentAnimatorStateInfo(0).IsName("Normal_Attack_1"))
             return true;
@@ -49,4 +51,8 @@ public class Player : MonoBehaviour{
             return true;
         return false;
     }
+
+    #endregion
+    
+
 }

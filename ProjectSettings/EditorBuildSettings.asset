@@ -4,4 +4,8 @@
 EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
-  m_Scenes: []
+  m_Scenes:
+  - enabled: 1
+    path: Assets/Scenes/OutdoorsDXRScene.unity
+    guid: 41e9d1451ba87264a8053942d50bf063
+  m_configObjects: {}
