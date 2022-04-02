@@ -30,10 +30,10 @@ public class PlayerStats : MonoBehaviour{
         maxHealth = 240;
         mana = 100;
         maxMana = 100;
-        HealthSystemGUI.Instance.SetHealth(health);
-        HealthSystemGUI.Instance.SetMaxHealth(maxHealth);
-        HealthSystemGUI.Instance.SetMana(mana);
-        HealthSystemGUI.Instance.SetMaxMana(maxMana);
+        // HealthSystemGUI.Instance.SetHealth(50);
+        // HealthSystemGUI.Instance.SetMaxHealth(100);
+        // HealthSystemGUI.Instance.SetMana(50);
+        // HealthSystemGUI.Instance.SetMaxMana(100);
         
         
     }

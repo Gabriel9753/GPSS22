@@ -7,8 +7,8 @@ using UnityEngine.AI;
 
 public class PlayerMovement : MonoBehaviour
 {
-    public Camera camera;
-    public static NavMeshAgent agent;
+    private Camera camera;
+    public NavMeshAgent agent;
     private RaycastHit hit;
     public static Animator animator;
     public int maxDistance = 70;
@@ -21,23 +21,25 @@ public class PlayerMovement : MonoBehaviour
     // Called when a script is enabled
     void Start()
     {
+//        Debug.Log("Player Movement");
         animator = GetComponent<Animator>();
-        agent = GetComponent<NavMeshAgent>();
+        camera = Player.instance.getCamera();
+        //agent = GetComponent<NavMeshAgent>();
     }
 
     // Called once every frame
     void Update()
     {
-        //if (!Player.instance.isRolling() && !Player.instance.isAttacking()){
-        if (Input.GetMouseButton(0))
+        if (!Player.instance.isRolling() && !Player.instance.isAttacking())
+        {
+            if (Input.GetMouseButton(0))
             {
                 Ray ray = camera.ScreenPointToRay(Input.mousePosition);
-                Debug.DrawLine(camera.transform.position, ray.direction, Color.green);
-                Debug.Log(camera.transform.position);
+//                Debug.Log(Physics.Raycast(ray, out hit, maxDistance, moveMask));
                 
                 if (Physics.Raycast(ray, out hit, maxDistance, moveMask))
                 {
-                    Debug.Log("HIT " + hit.transform.position);
+                    //Debug.Log("HIT " + hit.transform.position);
                     agent.speed = walkSpeed;
                     animator.SetBool("isRolling", false);
                     animator.SetBool("isRunning", true);
@@ -62,7 +64,7 @@ public class PlayerMovement : MonoBehaviour
                 agent.speed = walkSpeed;
                 animator.SetBool("isRunning", false);
             }
-        //}
+        }
 
         if (Player.instance.isAttacking()){
             agent.ResetPath();
@@ -70,14 +72,15 @@ public class PlayerMovement : MonoBehaviour
 
     }
 
-    public static void Warp(Vector3 newPosition)
+    public void Warp(Vector3 newPosition)
     {
-        Debug.Log("Position: "+newPosition +" "+ agent);
+        Debug.Log("Position: "+newPosition+" and agent: " + agent);
+        agent.Warp(newPosition);
         animator.SetBool("isRunning", false);
         
     }
 
-    public void setCamera(Camera camera){
-        this.camera = camera;
-    }
+
+    
+
 }

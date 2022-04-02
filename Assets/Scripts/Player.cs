@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class Player : MonoBehaviour{
     private Animator _animator;
+    private Camera camera;
     #region Singleton
 
     public static Player instance;
@@ -11,6 +12,7 @@ public class Player : MonoBehaviour{
     void Awake ()
     {
         instance = this;
+        
     }
 
     #endregion
@@ -23,7 +25,7 @@ public class Player : MonoBehaviour{
     //public CharacterCombat playerCombatManager;
     //public PlayerStats playerStats;
 
-
+    
     void Die() {
        // SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
     }
@@ -48,5 +50,13 @@ public class Player : MonoBehaviour{
         if (_animator.GetCurrentAnimatorStateInfo(0).IsName("Rolling"))
             return true;
         return false;
+    }
+    
+    public void setCamera(Camera camera){
+        this.camera = camera;
+    }
+    
+    public Camera getCamera(){
+        return this.camera;
     }
 }
