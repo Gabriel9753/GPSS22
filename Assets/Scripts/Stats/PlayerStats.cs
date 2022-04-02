@@ -18,7 +18,6 @@ public class PlayerStats : MonoBehaviour{
         HealthSystemGUI.Instance.health = 112;
         HealthSystemGUI.Instance.maxMana = 112;
         HealthSystemGUI.Instance.mana = 112;
-        
     }
 
     public void Update(){

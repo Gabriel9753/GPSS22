@@ -16,7 +16,7 @@ public class PlayerCombo : MonoBehaviour{
     public bool normal3_ready = true;
 
     void Start(){
-        _animator = GetComponent<Animator>();
+        _animator = Player.instance.getAnimator();
     }
 
     public void ComboPossible(){
