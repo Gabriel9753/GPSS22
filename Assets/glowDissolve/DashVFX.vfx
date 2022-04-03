@@ -20,7 +20,7 @@ MonoBehaviour:
     x: -632
     y: -190
     width: 2011
-    height: 2260
+    height: 2508
 --- !u!114 &114350483966674976
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -183,7 +183,7 @@ MonoBehaviour:
   - {fileID: 8926484042661614569}
   - {fileID: 8926484042661614580}
   - {fileID: 8926484042661614618}
-  m_UIPosition: {x: 941.3827, y: 114.57214}
+  m_UIPosition: {x: 941, y: 231}
   m_UICollapsed: 0
   m_UISuperCollapsed: 0
   m_InputSlots:
@@ -529,7 +529,7 @@ MonoBehaviour:
   - {fileID: 8926484042661614583}
   - {fileID: 8926484042661614585}
   dataType: 0
-  capacity: 20000
+  capacity: 10000
   stripCapacity: 16
   particlePerStripCount: 16
   m_Space: 0
@@ -1014,7 +1014,7 @@ MonoBehaviour:
   m_Children:
   - {fileID: 8926484042661614598}
   - {fileID: 8926484042661614673}
-  m_UIPosition: {x: 942, y: 784}
+  m_UIPosition: {x: 942, y: 901}
   m_UICollapsed: 0
   m_UISuperCollapsed: 0
   m_InputSlots: []
@@ -1052,7 +1052,7 @@ MonoBehaviour:
   - {fileID: 8926484042661614589}
   - {fileID: 8926484042661614684}
   - {fileID: 8926484042661614596}
-  m_UIPosition: {x: 955, y: 1573}
+  m_UIPosition: {x: 955, y: 1821}
   m_UICollapsed: 0
   m_UISuperCollapsed: 0
   m_InputSlots:
@@ -1113,7 +1113,7 @@ MonoBehaviour:
       m_Type:
         m_SerializableType: UnityEngine.Texture2D, UnityEngine.CoreModule, Version=0.0.0.0,
           Culture=neutral, PublicKeyToken=null
-      m_SerializableObject: '{"obj":{"fileID":2800000,"guid":"73a2b1df0f86e1147b28087ba8ce2b31","type":3}}'
+      m_SerializableObject: '{"obj":{"fileID":2800000,"guid":"b3c4df2a031631a4883a334ce5b31c54","type":3}}'
     m_Space: 2147483647
   m_Property:
     name: mainTexture
@@ -1238,7 +1238,7 @@ MonoBehaviour:
       m_Type:
         m_SerializableType: System.Single, mscorlib, Version=4.0.0.0, Culture=neutral,
           PublicKeyToken=b77a5c561934e089
-      m_SerializableObject: 1.3
+      m_SerializableObject: 0.08
     m_Space: 2147483647
   m_Property:
     name: Size
@@ -3956,7 +3956,7 @@ MonoBehaviour:
       m_Type:
         m_SerializableType: UnityEngine.Vector3, UnityEngine.CoreModule, Version=0.0.0.0,
           Culture=neutral, PublicKeyToken=null
-      m_SerializableObject: '{"x":0.14877769351005555,"y":0.3599354326725006,"z":0.801886796951294}'
+      m_SerializableObject: '{"x":0.800000011920929,"y":0.16166305541992188,"z":0.14901958405971528}'
     m_Space: 2147483647
   m_Property:
     name: Color

@@ -26,14 +26,19 @@ public class PlayerCombo : MonoBehaviour{
     //Is called by animation for transisition from Attack A -> Attack B. Only if you hit the right timing and incremented comboStep.
     public void NextAttack(){
         if (comboStep == 1 && normal1_ready){
+            
+            Player.instance.PlayerToMouseRotation();
             _animator.Play("Normal_Attack_1");
             StartCoroutine(Cooldown_Normal_1());
         }
         if(comboStep == 2 && normal2_ready){
+            
+            Player.instance.PlayerToMouseRotation();
             _animator.Play("Normal_Attack_2");
             StartCoroutine(Cooldown_Normal_2());
         }
         if(comboStep == 3 && normal3_ready){
+            Player.instance.PlayerToMouseRotation();
             _animator.Play("Normal_Attack_3");
             StartCoroutine(Cooldown_Normal_3());
         }
@@ -46,6 +51,7 @@ public class PlayerCombo : MonoBehaviour{
 
     public void NormalAttack(){
         if (comboStep == 0 && normal1_ready){
+            Player.instance.PlayerToMouseRotation();
             _animator.Play("Normal_Attack_1");
             StartCoroutine(Cooldown_Normal_1());
             comboStep = 1;

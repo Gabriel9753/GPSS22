@@ -91,4 +91,11 @@ public class Player : MonoBehaviour{
         get => _agent;
         set => _agent = value;
     }
+
+    public void PlayerToMouseRotation(){
+        Vector2 positionOnScreen = camera.WorldToViewportPoint (transform.position);
+        Vector2 mouseOnScreen = camera.ScreenToViewportPoint(Input.mousePosition);
+        float angle =  Mathf.Atan2(positionOnScreen.y - mouseOnScreen.y, positionOnScreen.x - mouseOnScreen.x) * Mathf.Rad2Deg;
+        transform.rotation =  Quaternion.Euler (new Vector3(0f,transform.rotation.y-angle-45,0f));
+    }
 }
