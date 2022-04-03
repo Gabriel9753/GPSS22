@@ -58,7 +58,7 @@ public class EnemyMovement : MonoBehaviour
     }
 
     public void hitBySword(){
-        DamageTextManager.instance.DamageCreate(transform.position + new Vector3(0,3,0), 33, 11);
+        DamageTextManager.instance.DamageCreate(transform.position + new Vector3(0,3,0), Random.Range(100, 1559), 11);
         print(this.name + " got hit! :(");
         _animator.Play("hit");
         _animator.SetBool("isRunning", false);

@@ -6,6 +6,7 @@ using UnityEngine;
 
 public class DamageTextManager : MonoBehaviour{
     public GameObject damageText;
+    public float subFontSize;
     #region Singleton
 
     public static DamageTextManager instance;
@@ -23,23 +24,30 @@ public class DamageTextManager : MonoBehaviour{
         TextMeshPro textMesh = dmgTextToSpawn.GetComponent<TextMeshPro>();
         textMesh.text = num.ToString();
         dmgTextToSpawn = Instantiate(dmgTextToSpawn, position, Quaternion.Euler(30, 45, 0));
-        StartCoroutine(PositionChange(dmgTextToSpawn, dmgTextToSpawn.transform.localPosition, 1));
+        StartCoroutine(PositionChange(dmgTextToSpawn, dmgTextToSpawn.transform.localPosition, 1f));
         
     }
     
     private IEnumerator PositionChange(GameObject text, Vector3 targetPosition, float duration){
-        float rndX = UnityEngine.Random.Range(1,20);
-        float rndY = UnityEngine.Random.Range(1,7);
-        float rndZ = UnityEngine.Random.Range(1,20);
+        float rndX = UnityEngine.Random.Range(-1f,1f);
+        float rndY = UnityEngine.Random.Range(0f,1f);
+        float rndZ = UnityEngine.Random.Range(0f,1f);
         Vector3 startPosition = text.transform.localPosition;
-        targetPosition = targetPosition + new Vector3(rndX/10, rndY/10, rndZ/10);
+        float startSize = text.GetComponent<TextMeshPro>().fontSize;
+        targetPosition = targetPosition + new Vector3(rndX, rndY/200, rndZ/10);
         float timer = 0.0f;
+        float j = 0;
         while(timer < duration){
             timer += Time.deltaTime;
             float t = timer / duration;
             //smoother step algorithm
             t = t * t * t * (t * (6f * t - 15f) + 10f);
-            text.transform.localPosition = Vector3.Lerp(startPosition, targetPosition, t);
+            text.transform.localPosition = Vector3.Lerp(startPosition - new Vector3(0,1,0), targetPosition, t);
+            if (text.GetComponent<TextMeshPro>().fontSize > 0)
+                text.GetComponent<TextMeshPro>().fontSize -= j + subFontSize;
+            if (text.GetComponent<TextMeshPro>().fontSize < 0.2)
+                text.GetComponent<TextMeshPro>().fontSize = 0;
+            j += 0.00001f;
             yield return null;
         }
         Destroy(text);
