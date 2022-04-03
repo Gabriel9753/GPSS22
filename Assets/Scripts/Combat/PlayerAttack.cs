@@ -31,12 +31,14 @@ public class PlayerAttack : MonoBehaviour{
     
     // Called once every frame
     void Update(){
+        
+        if(Player.instance.standAttack()) 
+            _animator.SetBool("isRunToNormal", false);
+        
         //Right click for attack animation and not running
         if (Input.GetMouseButtonDown(1) && !Player.instance.isRunning()){
             if (Player.instance.moveAttack() && _animator){
                 if (_animator.GetCurrentAnimatorStateInfo(0).normalizedTime > 0.5f){
-                    print(_animator.GetCurrentAnimatorStateInfo(0).normalizedTime);
-                    //_animator.SetTrigger("triggerRunToNormal");
                     _animator.SetBool("isRunToNormal", true);
                 }
             }
@@ -80,7 +82,6 @@ public class PlayerAttack : MonoBehaviour{
         var projectileObj = Instantiate(projectile, origin.position, Quaternion.Euler (new Vector3(0f,transform.position.y-angle+225,0f))) as GameObject;
         //  print("proj position: " +projectileObj.transform.position +" desti: "+destination);
         projectileObj.GetComponent<Rigidbody>().velocity = (new Vector3(destination.x,origin.position.y,destination.z) - origin.position).normalized * projectileSpeed;
-
     }
     public void startAttack()
     {
