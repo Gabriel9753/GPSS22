@@ -20,17 +20,24 @@ public class PlayerMovement:MonoBehaviour{
     public float walkSpeed = 8.0f;
     public float agentSpeed = 0;
 
+    private Vector3 startScale;
+    public Vector3 dashScale;
+    public float shrinkDuration;
+    public GameObject dashVFX;
+
     // Called when a script is enabled
     void Start(){
         animator = Player.instance.getAnimator();
         agent = GetComponent<NavMeshAgent>();
         agentSpeed = walkSpeed;
+
+        startScale = transform.localScale;
     }
 
     // Called once every frame
     void Update(){
         agent.speed = agentSpeed;
-        if (!Player.instance.isDashing() && !Player.instance.isAttacking()){
+        if (!Player.instance.isDashing() && !Player.instance.isAttacking() && !Player.instance.moveAttack()){
             if (Input.GetMouseButton(0)){
                 Ray ray = camera.ScreenPointToRay(Input.mousePosition);
                 if (Physics.Raycast(ray, out hit, maxDistance, moveMask)){
@@ -80,5 +87,38 @@ public class PlayerMovement:MonoBehaviour{
 
     public void setSpeed(float speed){
         agentSpeed = speed;
+    }
+
+    public void startDash(){
+        dashVFX.SetActive(true);
+        StartCoroutine(ScaleToTargetCoroutine(dashScale, shrinkDuration));
+    }
+
+    public void endDash(){
+        
+        StartCoroutine(ScaleToTargetCoroutine(startScale, shrinkDuration));
+        dashVFX.SetActive(false);
+    }
+
+    public void startDashVFX(){
+        
+    }
+
+    public void endDashVFX(){
+        
+    }
+    private IEnumerator ScaleToTargetCoroutine(Vector3 targetScale, float duration){
+        Vector3 startScale = transform.localScale;
+        float timer = 0.0f;
+        while(timer < duration)
+        {
+            timer += Time.deltaTime;
+            float t = timer / duration;
+            //smoother step algorithm
+            t = t * t * t * (t * (6f * t - 15f) + 10f);
+            transform.localScale = Vector3.Lerp(startScale, targetScale, t);
+            yield return null;
+        }
+        yield return null;
     }
 }

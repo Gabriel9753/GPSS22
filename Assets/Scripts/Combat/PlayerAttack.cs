@@ -31,7 +31,6 @@ public class PlayerAttack : MonoBehaviour{
     
     // Called once every frame
     void Update(){
-        
         if(Player.instance.standAttack()) 
             _animator.SetBool("isRunToNormal", false);
         
@@ -42,8 +41,10 @@ public class PlayerAttack : MonoBehaviour{
                     _animator.SetBool("isRunToNormal", true);
                 }
             }
-            if(!Player.instance.moveAttack())
+            if (!Player.instance.moveAttack()){
+                _agent.ResetPath();
                 Player.instance.GetComponent<PlayerCombo>().NormalAttack();
+            }
         }
 
         
@@ -51,6 +52,8 @@ public class PlayerAttack : MonoBehaviour{
         if (Input.GetMouseButtonDown(1) && Player.instance.isRunning()){
             //Dash Attack
             if (_agent && _animator){
+                _agent.ResetPath();
+                _animator.SetBool("Run", false);
                 _animator.Play("RunAttack");
                 float alpha = (float)((transform.rotation.eulerAngles.y % 360) * Math.PI)/180;
                 Vector3 forward = new Vector3((float)Math.Sin(alpha), 0, (float)Math.Cos(alpha));
@@ -61,6 +64,7 @@ public class PlayerAttack : MonoBehaviour{
         
         //Shoot Fireball
         if (Input.GetKeyDown("w") && camera){
+            _agent.ResetPath();
             Vector2 positionOnScreen = camera.WorldToViewportPoint (transform.position);
             Vector2 mouseOnScreen = camera.ScreenToViewportPoint(Input.mousePosition);
             float angle = AngleBetweenTwoPoints(positionOnScreen, mouseOnScreen);
@@ -79,8 +83,7 @@ public class PlayerAttack : MonoBehaviour{
         Vector2 positionOnScreen = camera.WorldToViewportPoint (transform.position);
         Vector2 mouseOnScreen = camera.ScreenToViewportPoint(Input.mousePosition);
         float angle = AngleBetweenTwoPoints(positionOnScreen, mouseOnScreen);
-        var projectileObj = Instantiate(projectile, origin.position, Quaternion.Euler (new Vector3(0f,transform.position.y-angle+225,0f))) as GameObject;
-        //  print("proj position: " +projectileObj.transform.position +" desti: "+destination);
+        var projectileObj = Instantiate(projectile, origin.position, Quaternion.Euler (new Vector3(0f,transform.position.y-angle+225,0f)));
         projectileObj.GetComponent<Rigidbody>().velocity = (new Vector3(destination.x,origin.position.y,destination.z) - origin.position).normalized * projectileSpeed;
     }
     public void startAttack()
