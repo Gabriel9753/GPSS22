@@ -23,7 +23,6 @@ public class CameraFollow : MonoBehaviour
 
 
     private void Start(){
-        Debug.Log("Kamera");
         targetZoom = currentZoom;
         target = Player.instance.transform;
     }

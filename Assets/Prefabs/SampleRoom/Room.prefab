@@ -940,6 +940,11 @@ PrefabInstance:
       propertyPath: m_Materials.Array.data[0]
       value: 
       objectReference: {fileID: 2100000, guid: 6614307cba188144c92d8c3f78fa0863, type: 2}
+    - target: {fileID: 3917916698164857308, guid: c3f7c9bf78a908b448552700c219d45f,
+        type: 3}
+      propertyPath: m_NavMeshData
+      value: 
+      objectReference: {fileID: 0}
     - target: {fileID: 4271449247176712598, guid: c3f7c9bf78a908b448552700c219d45f,
         type: 3}
       propertyPath: m_Materials.Array.data[0]
@@ -3211,7 +3216,7 @@ PrefabInstance:
     - target: {fileID: -8679921383154817045, guid: 681220b62dd908f45ada123d56e66448,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: -4.1151705
+      value: -4
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 681220b62dd908f45ada123d56e66448,
         type: 3}

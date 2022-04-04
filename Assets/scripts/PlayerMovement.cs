@@ -76,7 +76,7 @@ public class PlayerMovement:MonoBehaviour{
         }
 
         if (Player.instance.moveAttack()){
-            agentSpeed = 9;
+            agentSpeed = 12;
         }
         
         //Dash direct after attacking for fast moving

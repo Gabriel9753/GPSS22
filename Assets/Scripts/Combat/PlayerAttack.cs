@@ -58,7 +58,7 @@ public class PlayerAttack : MonoBehaviour{
                 _animator.Play("RunAttack");
                 float alpha = (float)((transform.rotation.eulerAngles.y % 360) * Math.PI)/180;
                 Vector3 forward = new Vector3((float)Math.Sin(alpha), 0, (float)Math.Cos(alpha));
-                Vector3 newDestination = transform.position + forward * (2.5f);
+                Vector3 newDestination = transform.position + forward * (3f);
                 _agent.SetDestination(newDestination);
             }
         }

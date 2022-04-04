@@ -25,10 +25,9 @@ public class SetupWorld : MonoBehaviour
         for (int i = 0; i < enemies.Length; i++)
         {
             Instantiate(enemies[i]);
+            enemies[i].GetComponent<NavMeshAgent>().enabled = true;
         }
         Player.instance.transform.position = position.position;
+        Player.instance.GetComponent<NavMeshAgent>().enabled = true;
     }
-    
-    
-    
 }
