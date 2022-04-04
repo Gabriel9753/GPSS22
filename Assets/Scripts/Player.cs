@@ -6,7 +6,7 @@ using UnityEngine.AI;
 public class Player : MonoBehaviour{
     private Animator _animator;
     private NavMeshAgent _agent;
-    private Camera camera;
+    private new Camera camera;
     
     #region Singleton
 

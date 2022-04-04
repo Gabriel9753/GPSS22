@@ -12,7 +12,7 @@ public class PlayerAttack : MonoBehaviour{
     private Animator _animator;
     private NavMeshAgent _agent;
     
-    private Camera camera;
+    private new Camera camera;
     private RaycastHit hit;
     public int maxDistance = 70;
     public LayerMask moveMask;

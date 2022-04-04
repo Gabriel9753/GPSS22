@@ -7,13 +7,17 @@ using UnityEngine.AI;
 using UnityEngine.Serialization;
 
 public class PlayerMovement:MonoBehaviour{
-    private Camera camera;
+    private new Camera camera;
     public NavMeshAgent agent;
     private RaycastHit hit;
     public static Animator animator;
     public int maxDistance = 70;
     private Vector3 destination;
     public LayerMask moveMask;
+
+    public float cooldownDash = 1f;
+    public bool isDashReady = true;
+    
     
     public float dashSpeed = 13.0f;
     public float dashDistance = 10.0f;
@@ -51,7 +55,7 @@ public class PlayerMovement:MonoBehaviour{
                 }
             }
             //Dashing
-            if (Input.GetKeyDown("space")){
+            if (Input.GetKeyDown("space") && isDashReady){
                 Player.instance.PlayerToMouseRotation();
                 float alpha = (float)((transform.rotation.eulerAngles.y % 360) * Math.PI)/180;
                 Vector3 forward = new Vector3((float)Math.Sin(alpha), 0, (float)Math.Cos(alpha));
@@ -61,6 +65,7 @@ public class PlayerMovement:MonoBehaviour{
                 agentSpeed = dashSpeed;
                 animator.Play("Dash");
                 animator.SetBool("isRunning", false);
+                StartCoroutine(dashTimer());
             }
         }
         else{
@@ -80,13 +85,13 @@ public class PlayerMovement:MonoBehaviour{
         }
         
         //Dash direct after attacking for fast moving
-        if (Player.instance.isAttacking()){
+        if (Player.instance.isAttacking() && isDashReady){
             if (Input.GetKeyDown("space")){
                 InterruptAttackToDash();
             }
         }
 
-        if (Player.instance.moveAttack()){
+        if (Player.instance.moveAttack() && isDashReady){
             if (Input.GetKeyDown("space")){
                 InterruptAttackToDash();
             }
@@ -149,6 +154,13 @@ public class PlayerMovement:MonoBehaviour{
             agent.SetDestination(newDestination);
             destination = agent.destination;
             agentSpeed = dashSpeed;
+            StartCoroutine(dashTimer());
         }
+    }
+    
+    public IEnumerator dashTimer(){
+        isDashReady = false;
+        yield return new WaitForSecondsRealtime(cooldownDash);
+        isDashReady = true;
     }
 }

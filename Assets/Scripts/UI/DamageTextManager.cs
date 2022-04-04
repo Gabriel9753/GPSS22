@@ -41,7 +41,7 @@ public class DamageTextManager : MonoBehaviour{
             float t = timer / duration;
             //smoother step algorithm
             t = t * t * t * (t * (6f * t - 15f) + 10f);
-            text.transform.localPosition = Vector3.Lerp(startPosition - new Vector3(0,1,0), targetPosition, t);
+            text.transform.localPosition = Vector3.Lerp(startPosition - new Vector3(0,0,0), targetPosition, t);
             if (text.GetComponent<TextMeshPro>().fontSize > 0)
                 text.GetComponent<TextMeshPro>().fontSize -= j + subFontSize;
             if (text.GetComponent<TextMeshPro>().fontSize < 0.2)

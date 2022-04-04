@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class TransparentWalls : MonoBehaviour{
-    private Camera camera;
+    private new Camera camera;
     private Ray ray;
     private RaycastHit hit;
     public float maxDistance;
