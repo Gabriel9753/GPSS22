@@ -8,7 +8,6 @@ public class DamageTextManager : MonoBehaviour{
     public GameObject damageText;
     public float subFontSize;
     #region Singleton
-
     public static DamageTextManager instance;
     private Animator _animator;
 
