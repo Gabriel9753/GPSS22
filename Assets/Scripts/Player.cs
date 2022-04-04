@@ -75,6 +75,12 @@ public class Player : MonoBehaviour{
         return false;
     }
 
+    public bool isHit(){
+        if (_animator.GetCurrentAnimatorStateInfo(0).IsName("playerHit"))
+            return true;
+        return false;
+    }
+
     #endregion
     public void setCamera(Camera camera){
         this.camera = camera;

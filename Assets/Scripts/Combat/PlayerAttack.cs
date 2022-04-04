@@ -35,7 +35,7 @@ public class PlayerAttack : MonoBehaviour{
             _animator.SetBool("isRunToNormal", false);
         
         //Right click for attack animation and not running
-        if (Input.GetMouseButtonDown(1) && !Player.instance.isRunning() && !Player.instance.isDashing()){
+        if (Input.GetMouseButtonDown(1) && !Player.instance.isRunning() && !Player.instance.isDashing() && !Player.instance.isHit()){
             if (Player.instance.moveAttack() && _animator){
                 if (_animator.GetCurrentAnimatorStateInfo(0).normalizedTime > 0.5f){
                     Player.instance.PlayerToMouseRotation();
@@ -50,7 +50,7 @@ public class PlayerAttack : MonoBehaviour{
 
         
         //When running -> other attack animation
-        if (Input.GetMouseButtonDown(1) && Player.instance.isRunning()){
+        if (Input.GetMouseButtonDown(1) && Player.instance.isRunning() && !Player.instance.isHit()){
             //Dash Attack
             if (_agent && _animator){
                 Player.instance.PlayerToMouseRotation();
@@ -64,7 +64,7 @@ public class PlayerAttack : MonoBehaviour{
         }
         
         //Shoot Fireball
-        if (Input.GetKeyDown("w") && camera){
+        if (Input.GetKeyDown("w") && camera && !Player.instance.isHit()){
             _agent.ResetPath();
             Player.instance.PlayerToMouseRotation();
             
@@ -93,5 +93,11 @@ public class PlayerAttack : MonoBehaviour{
 
     float AngleBetweenTwoPoints(Vector3 a, Vector3 b) {
         return Mathf.Atan2(a.y - b.y, a.x - b.x) * Mathf.Rad2Deg;
+    }
+
+    public void GotHit(float damage){
+        _animator.Play("playerHit");
+        Player.instance.GetComponent<PlayerStats>().TakeDamage(damage);
+        Player.instance.GetComponent<PlayerCombo>().ResetCombo();
     }
 }

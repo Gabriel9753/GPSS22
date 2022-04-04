@@ -10,7 +10,7 @@ public class Weapon : MonoBehaviour{
             other.GetComponent<EnemyMovement>().hitBySword();
         }
         if (other.CompareTag("Player")){
-            Player.instance.GetComponent<PlayerStats>().TakeDamage(weaponDamage);
+            Player.instance.GetComponent<PlayerAttack>().GotHit(weaponDamage);
         }
         
     }

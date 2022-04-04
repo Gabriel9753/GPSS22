@@ -41,7 +41,7 @@ public class PlayerMovement:MonoBehaviour{
     // Called once every frame
     void Update(){
         agent.speed = agentSpeed;
-        if (!Player.instance.isDashing() && !Player.instance.isAttacking() && !Player.instance.moveAttack()){
+        if (!Player.instance.isDashing() && !Player.instance.isAttacking() && !Player.instance.moveAttack() && !Player.instance.isHit()){
             if (Input.GetMouseButton(0)){
                 Ray ray = camera.ScreenPointToRay(Input.mousePosition);
                 
@@ -76,7 +76,7 @@ public class PlayerMovement:MonoBehaviour{
             agentSpeed = walkSpeed;
             animator.SetBool("isRunning", false);
         }
-        if (Player.instance.standAttack()){
+        if (Player.instance.standAttack() || Player.instance.isHit()){
             agent.ResetPath();
         }
 
@@ -85,13 +85,13 @@ public class PlayerMovement:MonoBehaviour{
         }
         
         //Dash direct after attacking for fast moving
-        if (Player.instance.isAttacking() && isDashReady){
+        if (Player.instance.isAttacking() && isDashReady && !Player.instance.isHit()){
             if (Input.GetKeyDown("space")){
                 InterruptAttackToDash();
             }
         }
 
-        if (Player.instance.moveAttack() && isDashReady){
+        if (Player.instance.moveAttack() && isDashReady && !Player.instance.isHit()){
             if (Input.GetKeyDown("space")){
                 InterruptAttackToDash();
             }

@@ -6,6 +6,7 @@ using UnityEngine.AI;
 public class EnemyMovement : MonoBehaviour
 {
     public float lookRadius = 8f;
+    public float speed = 8f;
 
     Transform target;
     NavMeshAgent agent;
@@ -21,6 +22,8 @@ public class EnemyMovement : MonoBehaviour
     }
 
     void Update (){
+
+        agent.speed = speed; 
         // Get the distance to the player
         float distance = Vector3.Distance(target.position, transform.position);
         
@@ -63,6 +66,7 @@ public class EnemyMovement : MonoBehaviour
         _animator.Play("hit");
         _animator.SetBool("isRunning", false);
         _animator.SetBool("isAttacking", false);
+        agent.ResetPath();
     }
     
     

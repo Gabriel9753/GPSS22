@@ -27,7 +27,7 @@ public class TransparentWalls : MonoBehaviour{
     }
 
     // Update is called once per frame
-    void Update(){
+/*   void Update(){
 
         ray = new Ray(camera.transform.position, camera.transform.forward);
         //print(camera.transform.position+"/ "+ray.origin +"| "+ Player.instance.transform.position +"/ "+ray.direction );
@@ -40,7 +40,7 @@ public class TransparentWalls : MonoBehaviour{
             transform.LookAt(Player.instance.transform);
         }
     }
-
+*/
 
 
 
@@ -48,8 +48,7 @@ public class TransparentWalls : MonoBehaviour{
         float characterDistance = Vector3.Distance(camera.transform.position, Player.instance.transform.position);
         int layerNumber = LayerMask.NameToLayer("Wall");
         int layerMask = 1 << layerNumber;
-        RaycastHit[] hits = Physics.RaycastAll(camera.transform.position,
-            Player.instance.transform.position - camera.transform.position, characterDistance, layerMask);
+        RaycastHit[] hits = Physics.RaycastAll(camera.transform.position, Player.instance.transform.position - camera.transform.position, characterDistance, layerMask);
         if (hits.Length > 0){
             // Means that some stuff is blocking the view
             int newHits = hits.Length - oldHitsNumber;

@@ -25,6 +25,10 @@ public class PlayerCombo : MonoBehaviour{
 
     //Is called by animation for transisition from Attack A -> Attack B. Only if you hit the right timing and incremented comboStep.
     public void NextAttack(){
+        if (Player.instance.isHit()){
+            ResetCombo();
+            return;
+        }
         if (comboStep == 1 && normal1_ready){
             
             Player.instance.PlayerToMouseRotation();
