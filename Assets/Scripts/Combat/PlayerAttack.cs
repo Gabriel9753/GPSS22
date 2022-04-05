@@ -19,6 +19,8 @@ public class PlayerAttack : MonoBehaviour{
     private Vector3 destination;
     public GameObject projectile;
     private float projectileSpeed = 15;
+
+    private bool checkRunAttack;
     
     // Called when a script is enabled
     void Start(){
@@ -27,14 +29,19 @@ public class PlayerAttack : MonoBehaviour{
         _animator = Player.instance.getAnimator();
         _agent = GetComponent<NavMeshAgent>();
         camera = Player.instance.getCamera();
+        checkRunAttack = false;
     }
     
     // Called once every frame
     void Update(){
         if(Player.instance.standAttack()) 
             _animator.SetBool("isRunToNormal", false);
-        
-        //Right click for attack animation and not running
+        if (checkRunAttack && !Player.instance.moveAttack()){
+            _agent.ResetPath();
+            checkRunAttack = false;
+        }
+
+            //Right click for attack animation and not running
         if (Input.GetMouseButtonDown(1) && !Player.instance.isRunning() && !Player.instance.isDashing() && !Player.instance.isHit()){
             if (Player.instance.moveAttack() && _animator){
                 if (_animator.GetCurrentAnimatorStateInfo(0).normalizedTime > 0.5f){
@@ -60,6 +67,7 @@ public class PlayerAttack : MonoBehaviour{
                 Vector3 forward = new Vector3((float)Math.Sin(alpha), 0, (float)Math.Cos(alpha));
                 Vector3 newDestination = transform.position + forward * (3f);
                 _agent.SetDestination(newDestination);
+                checkRunAttack = true;
             }
         }
         
