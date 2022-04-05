@@ -36,7 +36,7 @@ public class PlayerAttack : MonoBehaviour{
     void Update(){
         if(Player.instance.standAttack()) 
             _animator.SetBool("isRunToNormal", false);
-        if (checkRunAttack && !Player.instance.moveAttack()){
+        if (checkRunAttack && !Player.instance.moveAttack() && !Player.instance.isDashing()){
             _agent.ResetPath();
             checkRunAttack = false;
         }

@@ -20,10 +20,6 @@ public class PlayerStats : MonoBehaviour{
         HealthSystemGUI.Instance.mana = 112;
     }
 
-    public void Update(){
-        
-    }
-
     public void TakeDamage (float damage)
     {
         // Make sure damage doesn't go below 0.

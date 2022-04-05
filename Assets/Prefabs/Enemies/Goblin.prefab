@@ -1765,6 +1765,7 @@ GameObject:
   - component: {fileID: 7300446256605130016}
   - component: {fileID: 7300446256605130017}
   - component: {fileID: 7300446256605130018}
+  - component: {fileID: 8758745603896043261}
   m_Layer: 0
   m_Name: Goblin
   m_TagString: Enemy
@@ -1859,6 +1860,22 @@ MonoBehaviour:
   lookRadius: 15
   speed: 14
   weapon: {fileID: 1081802284217643266}
+--- !u!114 &8758745603896043261
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7606875407666948386}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8ed438f5ce61bc5478b9cd1338d6d7e7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  maxHealth: 200
+  maxMana: 200
+  health: 50
+  mana: 100
 --- !u!1 &7631805960273746732
 GameObject:
   m_ObjectHideFlags: 0

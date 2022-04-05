@@ -17,10 +17,8 @@ public class Transparent : MonoBehaviour{
     
     private void Update(){
         GetAllObjectsInWay();
-        
         MakeObjectsTransperant();
         MakeObjectsSolid();
-        
     }
 
     private void GetAllObjectsInWay(){

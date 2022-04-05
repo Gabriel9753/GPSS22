@@ -28,7 +28,7 @@ public class EnemyMovement : MonoBehaviour
         float distance = Vector3.Distance(target.position, transform.position);
         
         // If inside the radius
-        if (!_animator.GetCurrentAnimatorStateInfo(0).IsName("swing") && !_animator.GetCurrentAnimatorStateInfo(0).IsName("hit")){
+        if (!_animator.GetCurrentAnimatorStateInfo(0).IsName("die") && !_animator.GetCurrentAnimatorStateInfo(0).IsName("swing") && !_animator.GetCurrentAnimatorStateInfo(0).IsName("hit")){
             if (distance <= lookRadius){
                 // Move towards the player
                 _animator.SetBool("isRunning", true);
@@ -46,6 +46,9 @@ public class EnemyMovement : MonoBehaviour
             }
         }
 
+
+        //TODO: DIE in an "enemy" class
+        if(_animator.GetCurrentAnimatorStateInfo(0).normalizedTime > 0.9f && _animator.GetCurrentAnimatorStateInfo(0).IsName("die")) Destroy(gameObject);
     }
 
     // Point towards the player
@@ -58,15 +61,6 @@ public class EnemyMovement : MonoBehaviour
     void OnDrawGizmosSelected (){
         Gizmos.color = Color.red;
         Gizmos.DrawWireSphere(transform.position, lookRadius);
-    }
-
-    public void hitBySword(){
-        DamageTextManager.instance.DamageCreate(transform.position + new Vector3(0,3,0), Random.Range(100, 1559), 11);
-        print(this.name + " got hit! :(");
-        _animator.Play("hit");
-        _animator.SetBool("isRunning", false);
-        _animator.SetBool("isAttacking", false);
-        agent.ResetPath();
     }
     
     

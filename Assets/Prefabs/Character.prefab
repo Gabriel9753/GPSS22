@@ -140,11 +140,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   comboStep: 0
-  cooldown_normal1: 1
+  cooldown_normal1: 0
   normal1_ready: 1
-  cooldown_normal2: 1
+  cooldown_normal2: 0
   normal2_ready: 1
-  cooldown_normal3: 1
+  cooldown_normal3: 0
   normal3_ready: 1
 --- !u!114 &-3070811404814012357
 MonoBehaviour:
