@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -79,6 +80,11 @@ public class Player : MonoBehaviour{
         if (_animator.GetCurrentAnimatorStateInfo(0).IsName("playerHit"))
             return true;
         return false;
+    }
+
+    public String getPlayedAnimationName(){
+        var thing = _animator.GetCurrentAnimatorStateInfo(0);
+        return null;
     }
 
     #endregion

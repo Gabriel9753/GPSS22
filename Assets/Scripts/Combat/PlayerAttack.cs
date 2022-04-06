@@ -22,6 +22,8 @@ public class PlayerAttack : MonoBehaviour{
 
     private bool checkRunAttack;
     
+    
+    
     // Called when a script is enabled
     void Start(){
         //Get collider from held weapon
@@ -108,4 +110,6 @@ public class PlayerAttack : MonoBehaviour{
         Player.instance.GetComponent<PlayerStats>().TakeDamage(damage);
         Player.instance.GetComponent<PlayerCombo>().ResetCombo();
     }
+    
+    
 }
