@@ -30,7 +30,6 @@ public class PlayerCombo : MonoBehaviour{
             return;
         }
         if (comboStep == 1 && normal1_ready){
-            
             Player.instance.PlayerToMouseRotation();
             _animator.Play("Normal_Attack_1");
             StartCoroutine(Cooldown_Normal_1());

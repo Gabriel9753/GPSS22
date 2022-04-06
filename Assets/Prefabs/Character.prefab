@@ -140,11 +140,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   comboStep: 0
-  cooldown_normal1: 0
+  cooldown_normal1: 0.1
   normal1_ready: 1
-  cooldown_normal2: 0
+  cooldown_normal2: 0.1
   normal2_ready: 1
-  cooldown_normal3: 0
+  cooldown_normal3: 0.1
   normal3_ready: 1
 --- !u!114 &-3070811404814012357
 MonoBehaviour:
@@ -190,6 +190,12 @@ MonoBehaviour:
   mana: 0
   healthUI: {fileID: 1712802539643679717, guid: c1e4427fc5e4eba43895623b7ba67f85,
     type: 3}
+  baseDamage: 10
+  sumDamage: 1
+  baseCriticalChance: 10
+  sumCriticalChance: 1
+  baseCriticalDamage: 20
+  sumCriticalDamage: 1
 --- !u!195 &8073898999792615349
 NavMeshAgent:
   m_ObjectHideFlags: 0

@@ -66219,7 +66219,7 @@ AnimationClip:
   m_HasGenericRootTransform: 0
   m_HasMotionFloatCurves: 0
   m_Events:
-  - time: 0
+  - time: 0.41666666
     functionName: ComboPossible
     data: 
     objectReferenceParameter: {fileID: 0}

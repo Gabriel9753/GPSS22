@@ -82,9 +82,34 @@ public class Player : MonoBehaviour{
         return false;
     }
 
-    public String getPlayedAnimationName(){
-        var thing = _animator.GetCurrentAnimatorStateInfo(0);
-        return null;
+    public String GetSpeedMultiplierName(){
+        if (_animator.GetCurrentAnimatorStateInfo(0).IsName("Normal_Attack_1"))
+            return "Normal1";
+        if (_animator.GetCurrentAnimatorStateInfo(0).IsName("Normal_Attack_2"))
+            return "Normal2";
+        if (_animator.GetCurrentAnimatorStateInfo(0).IsName("Normal_Attack_3"))
+            return "Normal3";
+        if (_animator.GetCurrentAnimatorStateInfo(0).IsName("RunAttack"))
+            return "run Attack";
+        
+        //ADD NEW ATTACK OR ABILITY HERE
+        
+        return "";
+    }
+    
+    public String GetAnimationName(){
+        if (_animator.GetCurrentAnimatorStateInfo(0).IsName("Normal_Attack_1"))
+            return "Normal_Attack_1";
+        if (_animator.GetCurrentAnimatorStateInfo(0).IsName("Normal_Attack_2"))
+            return "Normal_Attack_2";
+        if (_animator.GetCurrentAnimatorStateInfo(0).IsName("Normal_Attack_3"))
+            return "Normal_Attack_3";
+        if (_animator.GetCurrentAnimatorStateInfo(0).IsName("RunAttack"))
+            return "RunAttack";
+        
+        //ADD NEW ATTACK OR ABILITY HERE
+        
+        return "";
     }
 
     #endregion

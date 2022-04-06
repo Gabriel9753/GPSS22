@@ -1874,7 +1874,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   maxHealth: 200
   maxMana: 200
-  health: 50
+  health: 100
   mana: 100
 --- !u!1 &7631805960273746732
 GameObject:

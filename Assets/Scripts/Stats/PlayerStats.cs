@@ -12,7 +12,18 @@ public class PlayerStats : MonoBehaviour{
     public float mana = 100;
     private static bool called = false;
     public GameObject healthUI;
-
+    
+    
+    
+    public float baseDamage = 1;
+    public float sumDamage = 1;
+    
+    public float baseCriticalChance = 1;
+    public float sumCriticalChance = 1;
+    
+    public float baseCriticalDamage = 1;
+    public float sumCriticalDamage = 1;
+    
     public void Start(){
         HealthSystemGUI.Instance.maxHealth = 112;
         HealthSystemGUI.Instance.health = 112;
@@ -45,5 +56,14 @@ public class PlayerStats : MonoBehaviour{
         HealthSystemGUI.Instance.HealDamage(amount);
     }
 
-
+    public void addPlayerDamage(float dmg){
+        sumDamage = baseDamage + dmg;
+    }
+    
+    public void addPlayerCriticalChance(float critChance){
+        sumCriticalChance = baseCriticalChance + critChance;
+    }
+    public void addPlayerCriticalDamage(float critDmg){
+        sumCriticalDamage = baseCriticalDamage + critDmg;
+    }
 }
