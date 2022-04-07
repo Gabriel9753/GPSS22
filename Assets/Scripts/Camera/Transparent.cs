@@ -50,8 +50,8 @@ public class Transparent : MonoBehaviour{
         for (int i = 0; i < currentlyInWay.Count; i++){
             ObjectInWay inWay = currentlyInWay[i];
             if (!alreadyTransperant.Contains(inWay)){
-                inWay.ShowTransparent();
-                alreadyTransperant.Add(inWay);
+                if(inWay.ShowTransparent())
+                    alreadyTransperant.Add(inWay);
             }
         }
     }
@@ -60,8 +60,8 @@ public class Transparent : MonoBehaviour{
         for (int i = alreadyTransperant.Count - 1; i >= 0; i--){
             ObjectInWay wasInWay = alreadyTransperant[i];
             if (!currentlyInWay.Contains(wasInWay)){
-                wasInWay.ShowSolid();
-                alreadyTransperant.Remove(wasInWay);
+                if(wasInWay.ShowSolid())
+                    alreadyTransperant.Remove(wasInWay);
             }
         }
     }
