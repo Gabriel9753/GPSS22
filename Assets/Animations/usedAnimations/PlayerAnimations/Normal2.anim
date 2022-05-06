@@ -83383,7 +83383,7 @@ AnimationClip:
     floatParameter: 0
     intParameter: 0
     messageOptions: 0
-  - time: 1.7833333
+  - time: 1.3166667
     functionName: ResetCombo
     data: 
     objectReferenceParameter: {fileID: 0}

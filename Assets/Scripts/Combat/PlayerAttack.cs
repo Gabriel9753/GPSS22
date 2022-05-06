@@ -45,12 +45,6 @@ public class PlayerAttack : MonoBehaviour{
 
             //Right click for attack animation and not running
         if (Input.GetMouseButtonDown(1) && !Player.instance.isRunning() && !Player.instance.isDashing() && !Player.instance.isHit()){
-            if (Player.instance.moveAttack() && _animator){
-                if (_animator.GetCurrentAnimatorStateInfo(0).normalizedTime > 0.5f){
-                    Player.instance.PlayerToMouseRotation();
-                    _animator.SetBool("isRunToNormal", true);
-                }
-            }
             if (!Player.instance.moveAttack()){
                 _agent.ResetPath();
                 Player.instance.GetComponent<PlayerCombo>().NormalAttack();

@@ -95,13 +95,13 @@ public class HealthSystemGUI : MonoBehaviour
 	//==============================================================
 	// Health Logic
 	//==============================================================
-	private void UpdateHealthBar()
+	/*private void UpdateHealthBar()
 	{
 		float ratio = health / maxHealth;
 		currentHealthBar.rectTransform.localPosition = new Vector3(currentHealthBar.rectTransform.rect.width * ratio - currentHealthBar.rectTransform.rect.width, 0, 0);
 		healthText.text = health.ToString ("0") + "/" + maxHealth.ToString ("0");
 	}
-
+*/
 	private void UpdateHealthGlobe()
 	{
 		float ratio = health / maxHealth;
@@ -129,40 +129,40 @@ public class HealthSystemGUI : MonoBehaviour
 	public void SetMaxHealth(float input){
 		maxHealth = input;
 
-		UpdateHealthBar();
+		//UpdateHealthBar();
 		UpdateHealthGlobe();
 	}
 	
 	public void SetHealth(float input){
 		health = input;
 
-		UpdateHealthBar();
+		//UpdateHealthBar();
 		UpdateHealthGlobe();
 	}
 	
 	public void SetMana(float input){
 		mana = input;
 
-		UpdateManaBar();
+		//UpdateManaBar();
 		UpdateManaGlobe();
 	}
 	
 	public void SetMaxMana(float input){
 		maxMana = input;
 
-		UpdateManaBar();
+		//UpdateManaBar();
 		UpdateManaGlobe();
 	}
 
 	//==============================================================
 	// Mana Logic
 	//==============================================================
-	private void UpdateManaBar()
+	/*private void UpdateManaBar()
 	{
 		float ratio = mana / maxMana;
 		currentManaBar.rectTransform.localPosition = new Vector3(currentManaBar.rectTransform.rect.width * ratio - currentManaBar.rectTransform.rect.width, 0, 0);
 		manaText.text = mana.ToString ("0") + "/" + maxMana.ToString ("0");
-	}
+	}*/
 
 	private void UpdateManaGlobe()
 	{
@@ -197,9 +197,9 @@ public class HealthSystemGUI : MonoBehaviour
 	//==============================================================
 	private void UpdateGraphics()
 	{
-		UpdateHealthBar();
+		//UpdateHealthBar();
 		UpdateHealthGlobe();
-		UpdateManaBar();
+		//UpdateManaBar();
 		UpdateManaGlobe();
 	}
 

@@ -22,7 +22,6 @@ public class EnemyMovement : MonoBehaviour
     }
 
     void Update (){
-
         agent.speed = speed; 
         // Get the distance to the player
         float distance = Vector3.Distance(target.position, transform.position);
@@ -46,9 +45,6 @@ public class EnemyMovement : MonoBehaviour
             }
         }
 
-
-        //TODO: DIE in an "enemy" class
-        if(_animator.GetCurrentAnimatorStateInfo(0).normalizedTime > 0.9f && _animator.GetCurrentAnimatorStateInfo(0).IsName("die")) Destroy(gameObject);
     }
 
     // Point towards the player

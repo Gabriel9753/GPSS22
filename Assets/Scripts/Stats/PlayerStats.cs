@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using Unity.UI;
 
 public class PlayerStats : MonoBehaviour{
     
@@ -29,6 +30,7 @@ public class PlayerStats : MonoBehaviour{
         HealthSystemGUI.Instance.health = 112;
         HealthSystemGUI.Instance.maxMana = 112;
         HealthSystemGUI.Instance.mana = 112;
+        XP_UI.Instance.updateUI();
     }
 
     public void TakeDamage (float damage)

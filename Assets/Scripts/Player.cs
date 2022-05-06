@@ -22,10 +22,6 @@ public class Player : MonoBehaviour{
 
     #endregion
 
-    void Start(){
-        //playerStats.OnHealthReachedZero += Die;
-    }
-
     //public CharacterCombat playerCombatManager;
     //public PlayerStats playerStats;
 
