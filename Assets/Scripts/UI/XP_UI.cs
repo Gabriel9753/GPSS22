@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using Unity.UI;
+using UnityEngine.PlayerLoop;
 using UnityEngine.UI;
 
 public class XP_UI : MonoBehaviour
@@ -42,8 +43,12 @@ public class XP_UI : MonoBehaviour
     private void levelUp(){
         float overflowXP = currentXP - maxXP;
         level++;
+        levelText.GetComponent<Text>().text = "- Level " + level + " -";
         currentXP = overflowXP;
-        updateUI();
+        maxXP = calculateMaxXP();
+        xpBar.GetComponent<Slider>().maxValue = calculateMaxXP();
+        xpBar.GetComponent<Slider>().value = currentXP;
+        LevelUpUpgradesUI.Instance.ActivateUI();
     }
 
     public void setCurrentXP(float amount){
@@ -52,12 +57,14 @@ public class XP_UI : MonoBehaviour
     }
 
     public void updateUI(){
-        levelText.GetComponent<Text>().text = "- Level " + level + " -";
-        xpBar.GetComponent<Slider>().maxValue = calculateMaxXP();
         if (checkLevelUp()){
             levelUp();
         }
-        xpBar.GetComponent<Slider>().value = currentXP;
+        else{
+            xpBar.GetComponent<Slider>().maxValue = calculateMaxXP();
+            xpBar.GetComponent<Slider>().value = currentXP;
+            levelText.GetComponent<Text>().text = "- Level " + level + " -";
+        }
     }
 
     public void addXP(float amount){
@@ -73,10 +80,15 @@ public class XP_UI : MonoBehaviour
         while(timer < duration){
             timer += Time.deltaTime;
             float t = timer / duration;
+            //print(timer);
             yield return null;
         }
 
         xpText.enabled = false;
         yield return null;
+    }
+
+    public void selectedUpgradeAfterLevelUp(){
+        updateUI();
     }
 }

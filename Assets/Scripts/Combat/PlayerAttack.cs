@@ -14,15 +14,10 @@ public class PlayerAttack : MonoBehaviour{
     
     private new Camera camera;
     private RaycastHit hit;
-    public int maxDistance = 70;
-    public LayerMask moveMask;
     private Vector3 destination;
-    public GameObject projectile;
     private float projectileSpeed = 15;
 
     private bool checkRunAttack;
-    
-    
     
     // Called when a script is enabled
     void Start(){
@@ -44,7 +39,7 @@ public class PlayerAttack : MonoBehaviour{
         }
 
             //Right click for attack animation and not running
-        if (Input.GetMouseButtonDown(1) && !Player.instance.isRunning() && !Player.instance.isDashing() && !Player.instance.isHit()){
+        if (Input.GetMouseButtonDown(1) && !Player.instance.isRunning() && !Player.instance.isDashing() && !Player.instance.isHit() && !PauseMenu.gameIsPause){
             if (!Player.instance.moveAttack()){
                 _agent.ResetPath();
                 Player.instance.GetComponent<PlayerCombo>().NormalAttack();
@@ -53,7 +48,7 @@ public class PlayerAttack : MonoBehaviour{
 
         
         //When running -> other attack animation
-        if (Input.GetMouseButtonDown(1) && Player.instance.isRunning() && !Player.instance.isHit()){
+        if (Input.GetMouseButtonDown(1) && Player.instance.isRunning() && !Player.instance.isHit() && !PauseMenu.gameIsPause){
             //Dash Attack
             if (_agent && _animator){
                 Player.instance.PlayerToMouseRotation();
@@ -66,27 +61,8 @@ public class PlayerAttack : MonoBehaviour{
                 checkRunAttack = true;
             }
         }
-        
-        //Shoot Fireball
-        if (Input.GetKeyDown("w") && camera && !Player.instance.isHit()){
-            _agent.ResetPath();
-            Player.instance.PlayerToMouseRotation();
-            
-            Ray ray = camera.ScreenPointToRay(Input.mousePosition);
-            if (Physics.Raycast(ray, out hit, maxDistance, moveMask)){
-                destination = hit.point;
-                InstantiateProjectile(weapon.transform);
-            }
-        }
     }
-
-    void InstantiateProjectile(Transform origin){
-        Vector2 positionOnScreen = camera.WorldToViewportPoint (transform.position);
-        Vector2 mouseOnScreen = camera.ScreenToViewportPoint(Input.mousePosition);
-        float angle = AngleBetweenTwoPoints(positionOnScreen, mouseOnScreen);
-        var projectileObj = Instantiate(projectile, origin.position, Quaternion.Euler (new Vector3(0f,transform.position.y-angle+225,0f)));
-        projectileObj.GetComponent<Rigidbody>().velocity = (new Vector3(destination.x,origin.position.y,destination.z) - origin.position).normalized * projectileSpeed;
-    }
+    
     public void startAttack(){
         _boxCollider.enabled = true;
     }
@@ -95,15 +71,10 @@ public class PlayerAttack : MonoBehaviour{
         _boxCollider.enabled = false;
     }
 
-    float AngleBetweenTwoPoints(Vector3 a, Vector3 b) {
-        return Mathf.Atan2(a.y - b.y, a.x - b.x) * Mathf.Rad2Deg;
-    }
-
     public void GotHit(float damage){
         _animator.Play("playerHit");
         Player.instance.GetComponent<PlayerStats>().TakeDamage(damage);
         Player.instance.GetComponent<PlayerCombo>().ResetCombo();
     }
-    
-    
+
 }
