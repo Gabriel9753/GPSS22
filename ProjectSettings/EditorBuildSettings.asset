@@ -6,6 +6,10 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
+<<<<<<< Updated upstream
+    path: Assets/Scenes/OutdoorsDXRScene.unity
+=======
     path: Assets/Scenes/Main.unity
+>>>>>>> Stashed changes
     guid: 41e9d1451ba87264a8053942d50bf063
   m_configObjects: {}

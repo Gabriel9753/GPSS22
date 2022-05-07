@@ -9,13 +9,14 @@
 
 using UnityEngine.SceneManagement;
 using System.Collections;
+using System.Runtime.InteropServices;
 using UnityEngine;
 using UnityEngine.Serialization;
 using UnityEngine.UI;
 
 public class HealthSystemGUI : MonoBehaviour
 {
-	public static HealthSystemGUI Instance;
+	public static HealthSystemGUI instance;
 
 	public Image currentHealthBar;
 	public Image currentHealthGlobe;
@@ -29,29 +30,31 @@ public class HealthSystemGUI : MonoBehaviour
 	public float mana;
 	public float maxMana;
 
-	//==============================================================
-	// Regenerate Health & Mana
-	//==============================================================
-	public bool Regenerate = false;
-	public float regen = 0.1f;
+	public bool regenerate;
+	public float healthRegen;
+	public float manaRegen;
 	private float timeleft = 0.0f;	// Left time for current interval
 	public float regenUpdateInterval = 1f;
 
 	public bool GodMode;
-
-	//==============================================================
-	// Awake
-	//==============================================================
+	
 	void Awake()
 	{
-		Instance = this;
+		instance = this;
 	}
 	
 	//==============================================================
 	// Awake
 	//==============================================================
-  	void Start()
-	{
+  	void Start(){
+	    regenerate = true;
+	    SetMaxHealth(Player.instance.GetComponent<PlayerStats>().maxHealth);
+		SetHealth(Player.instance.GetComponent<PlayerStats>().health);
+		SetMana(Player.instance.GetComponent<PlayerStats>().mana);
+		SetMaxMana(Player.instance.GetComponent<PlayerStats>().maxMana);
+		SetHealthRegen(Player.instance.GetComponent<PlayerStats>().healthRegen);
+		SetManaRegen(Player.instance.GetComponent<PlayerStats>().manaRegen);
+		
 		UpdateGraphics();
 		timeleft = regenUpdateInterval; 
 	}
@@ -61,10 +64,11 @@ public class HealthSystemGUI : MonoBehaviour
 	//==============================================================
 	void Update ()
 	{
-		if (Regenerate)
+		if (regenerate)
 			Regen();
 	}
 
+	
 	//==============================================================
 	// Regenerate Health & Mana
 	//==============================================================
@@ -82,8 +86,8 @@ public class HealthSystemGUI : MonoBehaviour
 			}
 			else
 			{
-				HealDamage(regen);
-				RestoreMana(regen);				
+				HealDamage(healthRegen);
+				RestoreMana(manaRegen);				
 			}
 
 			UpdateGraphics();
@@ -95,13 +99,13 @@ public class HealthSystemGUI : MonoBehaviour
 	//==============================================================
 	// Health Logic
 	//==============================================================
-	/*private void UpdateHealthBar()
+	private void UpdateHealthBar()
 	{
 		float ratio = health / maxHealth;
 		currentHealthBar.rectTransform.localPosition = new Vector3(currentHealthBar.rectTransform.rect.width * ratio - currentHealthBar.rectTransform.rect.width, 0, 0);
 		healthText.text = health.ToString ("0") + "/" + maxHealth.ToString ("0");
 	}
-*/
+
 	private void UpdateHealthGlobe()
 	{
 		float ratio = health / maxHealth;
@@ -126,43 +130,51 @@ public class HealthSystemGUI : MonoBehaviour
 
 		UpdateGraphics();
 	}
+
+	public void SetHealthRegen(float input){
+		healthRegen += input;
+	}
+	public void SetManaRegen(float input){
+		manaRegen += input;
+	}
+	
 	public void SetMaxHealth(float input){
 		maxHealth = input;
 
-		//UpdateHealthBar();
+		UpdateHealthBar();
 		UpdateHealthGlobe();
 	}
 	
 	public void SetHealth(float input){
 		health = input;
 
-		//UpdateHealthBar();
+		UpdateHealthBar();
 		UpdateHealthGlobe();
 	}
 	
 	public void SetMana(float input){
 		mana = input;
 
-		//UpdateManaBar();
+		UpdateManaBar();
 		UpdateManaGlobe();
 	}
 	
 	public void SetMaxMana(float input){
 		maxMana = input;
 
-		//UpdateManaBar();
+		UpdateManaBar();
 		UpdateManaGlobe();
 	}
 
 	//==============================================================
 	// Mana Logic
 	//==============================================================
-	/*private void UpdateManaBar()
+	private void UpdateManaBar()
 	{
 		float ratio = mana / maxMana;
 		currentManaBar.rectTransform.localPosition = new Vector3(currentManaBar.rectTransform.rect.width * ratio - currentManaBar.rectTransform.rect.width, 0, 0);
 		manaText.text = mana.ToString ("0") + "/" + maxMana.ToString ("0");
-	}*/
+	}
 
 	private void UpdateManaGlobe()
 	{
@@ -197,9 +209,9 @@ public class HealthSystemGUI : MonoBehaviour
 	//==============================================================
 	private void UpdateGraphics()
 	{
-		//UpdateHealthBar();
+		UpdateHealthBar();
 		UpdateHealthGlobe();
-		//UpdateManaBar();
+		UpdateManaBar();
 		UpdateManaGlobe();
 	}
 

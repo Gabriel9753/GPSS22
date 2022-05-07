@@ -5,6 +5,14 @@ TagManager:
   serializedVersion: 2
   tags:
   - Shootable
+  - Enemy
+  - Ground
+  - weapon
+  - Entrance
+  - Exit
+  - ManaSprite
+  - HealthSprite
+  - Wall
   layers:
   - Default
   - TransparentFX
@@ -16,8 +24,8 @@ TagManager:
   - 
   - Lighting
   - Ground
+  - Wall
   - Postprocessing
-  - 
   - 
   - 
   - 

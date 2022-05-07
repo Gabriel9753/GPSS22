@@ -1,14 +1,15 @@
 fileFormatVersion: 2
+<<<<<<<< HEAD:Assets/Prefabs/Enemies/oger/oger.fbx.meta
 guid: 582cc6aa9ccb0a940b9a7308d7c956ab
+========
+guid: 1af6c9d4792b975498541f34267aefc6
+>>>>>>>> ilyi:Assets/Downloads/Weapons/LowPoly/FreeSwords/Sword1/Sword1_FBX.fbx.meta
 ModelImporter:
   serializedVersion: 20200
-  internalIDToNameTable:
-  - first:
-      74: -203655887218126122
-    second: mixamo.com
+  internalIDToNameTable: []
   externalObjects: {}
   materials:
-    materialImportMode: 2
+    materialImportMode: 1
     materialName: 0
     materialSearch: 1
     materialLocation: 1
@@ -34,7 +35,7 @@ ModelImporter:
     extraExposedTransformPaths: []
     extraUserProperties: []
     clipAnimations: []
-    isReadable: 0
+    isReadable: 1
   meshes:
     lODScreenPercentages: []
     globalScale: 1
@@ -98,7 +99,11 @@ ModelImporter:
   animationType: 2
   humanoidOversampling: 1
   avatarSetup: 0
+<<<<<<<< HEAD:Assets/Prefabs/Enemies/oger/oger.fbx.meta
   addHumanoidExtraRootOnlyWhenUsingAvatar: 1
+========
+  addHumanoidExtraRootOnlyWhenUsingAvatar: 0
+>>>>>>>> ilyi:Assets/Downloads/Weapons/LowPoly/FreeSwords/Sword1/Sword1_FBX.fbx.meta
   additionalBone: 0
   userData: 
   assetBundleName: 
