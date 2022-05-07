@@ -8,26 +8,31 @@ using UnityEngine.SceneManagement;
 public class EnemyStats : MonoBehaviour{
 
     public int level = 0;
-    public float maxHealth = 200;   // Maximum amount of health
-    public float maxMana = 200;
-    public float health = 50;	// Current amount of health
-    public float mana = 100;
+    public float exp = 0;
+    public float gold;
+    
+    public float maxHealth = 200;
+    public float health = 50;
+    public float damage;
     private Animator _animator;
     private NavMeshAgent _agent;
+    
+    public bool hittibaleWhileAttack = true;
     
 
     public void Start(){
         _animator = transform.GetComponent<Animator>();
         _agent = transform.GetComponent<NavMeshAgent>();
+        level = Player.instance.GetComponent<PlayerStats>().level;
+        calculateAndSetStats();
     }
 
     public void Update(){
         //TODO: DIE in an "enemy" class
-        if(_animator.GetCurrentAnimatorStateInfo(0).normalizedTime > 0.9f && _animator.GetCurrentAnimatorStateInfo(0).IsName("die")) Destroy(gameObject);
+        if(_animator.GetCurrentAnimatorStateInfo(0).normalizedTime > 0.8f && _animator.GetCurrentAnimatorStateInfo(0).IsName("die")) Destroy(gameObject);
     }
 
-    public void TakeDamage(float damage)
-    {
+    public void TakeDamage(float damage){
         // Make sure damage doesn't go below 0.
         damage = Mathf.Clamp(damage, 0, int.MaxValue);
         // Subtract damage from health
@@ -38,37 +43,35 @@ public class EnemyStats : MonoBehaviour{
             Die();
         }
         else{
-            _animator.Play("hit");
-            _animator.SetBool("isRunning", false);
-            _animator.SetBool("isAttacking", false);
-            _agent.ResetPath();
+            if (hittibaleWhileAttack){
+                _animator.Play("hit");
+                _animator.SetBool("isRunning", false);
+                _animator.SetBool("isAttacking", false);
+                _agent.ResetPath();
+            }
         }
     }
 
     public void Die(){
         //Give exp to player
-        XP_UI.Instance.addXP(calculateXP());
+        XP_UI.Instance.addXP(exp);
         GetComponent<CapsuleCollider>().enabled = false;
         _animator.Play("die");
+        SpawnManager.instance.removeEnemyFromList(gameObject);
     }
     
-    public void Heal (int amount)
-    {
-        amount = Mathf.Clamp(amount, 0, int.MaxValue);
-        health += amount;
-        if (health <= 0){
-            health = 100;
-        }
-        HealthSystemGUI.Instance.HealDamage(amount);
+    private void calculateAndSetStats(){
+        exp = level * 1.5f + 20;
+        health = level * 7 + 50;
+        maxHealth = health;
+
+        damage = (float)Math.Pow(level, 1.15) * 3 + 15;
+        gold = (float)Math.Pow(level, 1.15) * 2 + 3;
     }
 
-    private float calculateXP(){
-        if (level == 0){
-            return 1;
-        }
-        else{
-            return level * 7;
-        }
+    public float calculateDamage(){
+        return damage;
     }
+    
 
 }

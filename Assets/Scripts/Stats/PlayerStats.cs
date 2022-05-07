@@ -11,7 +11,7 @@ public class PlayerStats : MonoBehaviour{
     public float maxMana = 200;
     public float health = 100;	// Current amount of health
     public float mana = 100;
-    private static bool called = false;
+    public int level;
 
 
     public float baseDamage = 1;
@@ -63,6 +63,7 @@ public class PlayerStats : MonoBehaviour{
     public void addPlayerCriticalChance(float critChance){
         sumCriticalChance = baseCriticalChance + critChance;
     }
+    
     public void addPlayerCriticalDamage(float critDmg){
         sumCriticalDamage = baseCriticalDamage + critDmg;
     }

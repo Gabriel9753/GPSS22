@@ -13,7 +13,6 @@ public class EnemyMovement : MonoBehaviour
     private Animator _animator;
     public GameObject weapon;
     private BoxCollider _boxCollider;
-    
     void Start(){
         _boxCollider = weapon.GetComponent<BoxCollider>();
         agent = GetComponent<NavMeshAgent>();

@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.13279957, g: 0.12408328, b: 0.15331197, a: 1}
+  m_IndirectSpecularColor: {r: 0.13273388, g: 0.12402928, b: 0.15329146, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -157,6 +157,11 @@ PrefabInstance:
     - target: {fileID: 1381036644, guid: e0ef054f549e7c24eb59e81f6deca0fd, type: 3}
       propertyPath: m_RenderingPathCustomFrameSettings.msaaMode
       value: 9
+      objectReference: {fileID: 0}
+    - target: {fileID: 6581915323335770101, guid: e0ef054f549e7c24eb59e81f6deca0fd,
+        type: 3}
+      propertyPath: orthographic
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6581915323335770103, guid: e0ef054f549e7c24eb59e81f6deca0fd,
         type: 3}
@@ -553,7 +558,7 @@ PrefabInstance:
         type: 3}
       propertyPath: enemies.Array.data[0]
       value: 
-      objectReference: {fileID: 7606875407666948386, guid: b81365df3a3748d48b874b524a01df36,
+      objectReference: {fileID: 8469582750686853826, guid: f01e5ff940a6def4a953be67b8f07cf2,
         type: 3}
     - target: {fileID: 8811168023934207725, guid: 7e897f7ed47c65e48987f18f06b52813,
         type: 3}

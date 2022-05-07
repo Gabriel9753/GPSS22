@@ -7,21 +7,24 @@ using UnityEngine.UI;
 
 public class PlayerAttack : MonoBehaviour{
     //For later initializing
-    public GameObject weapon;
+    private GameObject weapon;
     private BoxCollider _boxCollider;
     private Animator _animator;
     private NavMeshAgent _agent;
-    
     private new Camera camera;
     private RaycastHit hit;
+    public int maxDistance = 70;
+    public LayerMask moveMask;
     private Vector3 destination;
-    private float projectileSpeed = 15;
-
+    
     private bool checkRunAttack;
+    
+    
     
     // Called when a script is enabled
     void Start(){
         //Get collider from held weapon
+        weapon = Player.instance.weapon;
         _boxCollider = weapon.GetComponent<BoxCollider>();
         _animator = Player.instance.getAnimator();
         _agent = GetComponent<NavMeshAgent>();
@@ -39,7 +42,7 @@ public class PlayerAttack : MonoBehaviour{
         }
 
             //Right click for attack animation and not running
-        if (Input.GetMouseButtonDown(1) && !Player.instance.isRunning() && !Player.instance.isDashing() && !Player.instance.isHit() && !PauseMenu.gameIsPause){
+        if (Input.GetMouseButtonDown(1) && !Player.instance.isRunning() && !Player.instance.isDashing() && !Player.instance.isHit()){
             if (!Player.instance.moveAttack()){
                 _agent.ResetPath();
                 Player.instance.GetComponent<PlayerCombo>().NormalAttack();
@@ -48,7 +51,7 @@ public class PlayerAttack : MonoBehaviour{
 
         
         //When running -> other attack animation
-        if (Input.GetMouseButtonDown(1) && Player.instance.isRunning() && !Player.instance.isHit() && !PauseMenu.gameIsPause){
+        if (Input.GetMouseButtonDown(1) && Player.instance.isRunning() && !Player.instance.isHit()){
             //Dash Attack
             if (_agent && _animator){
                 Player.instance.PlayerToMouseRotation();
@@ -62,7 +65,8 @@ public class PlayerAttack : MonoBehaviour{
             }
         }
     }
-    
+
+
     public void startAttack(){
         _boxCollider.enabled = true;
     }
@@ -70,11 +74,12 @@ public class PlayerAttack : MonoBehaviour{
     public void endAttack(){
         _boxCollider.enabled = false;
     }
-
+    
     public void GotHit(float damage){
         _animator.Play("playerHit");
         Player.instance.GetComponent<PlayerStats>().TakeDamage(damage);
         Player.instance.GetComponent<PlayerCombo>().ResetCombo();
     }
-
+    
+    
 }

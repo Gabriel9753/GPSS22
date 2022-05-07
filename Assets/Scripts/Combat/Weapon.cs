@@ -7,6 +7,7 @@ using Random = UnityEngine.Random;
 
 public class Weapon : MonoBehaviour{
     public float weaponDamage = 10;
+    public GameObject holder;
     private void OnTriggerEnter(Collider other){
         if (other.CompareTag("Enemy")){
             PlayerStats stats = Player.instance.GetComponent<PlayerStats>();
@@ -18,7 +19,8 @@ public class Weapon : MonoBehaviour{
             other.GetComponent<EnemyStats>().TakeDamage(damage);
         }
         if (other.CompareTag("Player")){
-            instance.GetComponent<PlayerAttack>().GotHit(weaponDamage);
+            float damage = holder.GetComponent<EnemyStats>().calculateDamage();
+            instance.GetComponent<PlayerAttack>().GotHit(damage);
         }
         
     }

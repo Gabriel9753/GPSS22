@@ -1835,8 +1835,8 @@ Transform:
   m_GameObject: {fileID: 7606875407666948386}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -19.114164, y: 9.275328, z: -34.77671}
-  m_LocalScale: {x: 1.5, y: 1.5, z: 1.5}
-  m_ConstrainProportionsScale: 0
+  m_LocalScale: {x: 1.32, y: 1.32, z: 1.32}
+  m_ConstrainProportionsScale: 1
   m_Children:
   - {fileID: 7617637776911249237}
   - {fileID: 3430391030545332551}
@@ -1913,7 +1913,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   lookRadius: 15
-  speed: 14
+  speed: 8
   weapon: {fileID: 1081802284217643266}
 --- !u!114 &8758745603896043261
 MonoBehaviour:
@@ -1928,10 +1928,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   level: 3
+  exp: 0
+  gold: 0
   maxHealth: 200
-  maxMana: 200
   health: 100
-  mana: 100
+  damage: 0
+  hittibaleWhileAttack: 1
 --- !u!1 &7631805960273746732
 GameObject:
   m_ObjectHideFlags: 0
@@ -2543,7 +2545,7 @@ BoxCollider:
   m_IsTrigger: 1
   m_Enabled: 0
   serializedVersion: 2
-  m_Size: {x: 0.8359884, y: 2.6859498, z: 0.11519388}
+  m_Size: {x: 0.99, y: 3.22, z: 0.42}
   m_Center: {x: 0.003270317, y: 0.5679798, z: -0.0000059668714}
 --- !u!114 &8870572200089541038
 MonoBehaviour:
@@ -2558,3 +2560,4 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   weaponDamage: 10
+  holder: {fileID: 7606875407666948386}

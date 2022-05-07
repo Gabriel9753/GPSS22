@@ -8,9 +8,11 @@ using UnityEngine.UI;
 
 public class XP_UI : MonoBehaviour
 {
-    public int level;
+    private int level;
     public float currentXP;
     public float maxXP;
+
+    private PlayerStats stats;
     
     public GameObject xpBar;
     public Text levelText;
@@ -28,6 +30,11 @@ public class XP_UI : MonoBehaviour
     }
     #endregion
 
+    private void Start(){
+        stats = Player.instance.GetComponent<PlayerStats>();
+        level = stats.level;
+    }
+
     private float calculateMaxXP(){
         float max_XP = 25 * level + 100;
         return max_XP;
@@ -43,6 +50,7 @@ public class XP_UI : MonoBehaviour
     private void levelUp(){
         float overflowXP = currentXP - maxXP;
         level++;
+        stats.level++;
         levelText.GetComponent<Text>().text = "- Level " + level + " -";
         currentXP = overflowXP;
         maxXP = calculateMaxXP();
