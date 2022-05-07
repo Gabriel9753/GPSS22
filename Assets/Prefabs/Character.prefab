@@ -46,8 +46,8 @@ GameObject:
   - component: {fileID: 6829105601966378942}
   - component: {fileID: 5069255263633227099}
   - component: {fileID: -2508405552961796203}
+  - component: {fileID: -8868794735694812783}
   - component: {fileID: -3070811404814012357}
-  - component: {fileID: 8575584847094445972}
   - component: {fileID: 8073898999792615349}
   - component: {fileID: 1206559430721515400}
   - component: {fileID: 8489242849116033983}
@@ -105,6 +105,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b1651660f7f75684996b2e424964a83b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+<<<<<<< Updated upstream
+=======
+  animator: {fileID: 0}
+  _agent: {fileID: 0}
+  weapon: {fileID: 8469535615664233301}
+  destination: {x: 0, y: 0, z: 0}
+  agentSpeed: 0
+>>>>>>> Stashed changes
 --- !u!114 &5069255263633227099
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -143,6 +151,39 @@ MonoBehaviour:
   normal2_ready: 1
   cooldown_normal3: 3
   normal3_ready: 1
+--- !u!114 &-8868794735694812783
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 273799333581028461}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 34d74c24cbe95234789321009526d0c6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  level: 1
+  maxHealth: 100
+  maxMana: 100
+  health: 100
+  mana: 100
+  healthRegen: 0
+  manaRegen: 0
+  gold: 0
+  goldMultiplier: 0
+  exp: 0
+  expMultiplier: 0
+  movementSpeed: 0
+  attackSpeed: 0
+  resistance: 0
+  lifesteal: 0
+  baseDamage: 1
+  sumDamage: 1
+  baseCriticalChance: 1
+  sumCriticalChance: 1
+  baseCriticalDamage: 1
+  sumCriticalDamage: 1
 --- !u!114 &-3070811404814012357
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -163,6 +204,7 @@ MonoBehaviour:
   dashSpeed: 27
   dashDistance: 8
   walkSpeed: 10
+<<<<<<< Updated upstream
   agentSpeed: 0
 --- !u!114 &8575584847094445972
 MonoBehaviour:
@@ -182,6 +224,11 @@ MonoBehaviour:
   mana: 0
   healthUI: {fileID: 1712802539643679717, guid: c1e4427fc5e4eba43895623b7ba67f85,
     type: 3}
+=======
+  dashScale: {x: 0.01, y: 0.01, z: 0.01}
+  shrinkDuration: 0.1
+  dashVFX: {fileID: 330701575871626247}
+>>>>>>> Stashed changes
 --- !u!195 &8073898999792615349
 NavMeshAgent:
   m_ObjectHideFlags: 0

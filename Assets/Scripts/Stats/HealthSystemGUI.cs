@@ -9,13 +9,14 @@
 
 using UnityEngine.SceneManagement;
 using System.Collections;
+using System.Runtime.InteropServices;
 using UnityEngine;
 using UnityEngine.Serialization;
 using UnityEngine.UI;
 
 public class HealthSystemGUI : MonoBehaviour
 {
-	public static HealthSystemGUI Instance;
+	public static HealthSystemGUI instance;
 
 	public Image currentHealthBar;
 	public Image currentHealthGlobe;
@@ -29,29 +30,31 @@ public class HealthSystemGUI : MonoBehaviour
 	public float mana;
 	public float maxMana;
 
-	//==============================================================
-	// Regenerate Health & Mana
-	//==============================================================
-	public bool Regenerate = false;
-	public float regen = 0.1f;
+	public bool regenerate;
+	public float healthRegen;
+	public float manaRegen;
 	private float timeleft = 0.0f;	// Left time for current interval
 	public float regenUpdateInterval = 1f;
 
 	public bool GodMode;
-
-	//==============================================================
-	// Awake
-	//==============================================================
+	
 	void Awake()
 	{
-		Instance = this;
+		instance = this;
 	}
 	
 	//==============================================================
 	// Awake
 	//==============================================================
-  	void Start()
-	{
+  	void Start(){
+	    regenerate = true;
+	    SetMaxHealth(Player.instance.GetComponent<PlayerStats>().maxHealth);
+		SetHealth(Player.instance.GetComponent<PlayerStats>().health);
+		SetMana(Player.instance.GetComponent<PlayerStats>().mana);
+		SetMaxMana(Player.instance.GetComponent<PlayerStats>().maxMana);
+		SetHealthRegen(Player.instance.GetComponent<PlayerStats>().healthRegen);
+		SetManaRegen(Player.instance.GetComponent<PlayerStats>().manaRegen);
+		
 		UpdateGraphics();
 		timeleft = regenUpdateInterval; 
 	}
@@ -61,10 +64,11 @@ public class HealthSystemGUI : MonoBehaviour
 	//==============================================================
 	void Update ()
 	{
-		if (Regenerate)
+		if (regenerate)
 			Regen();
 	}
 
+	
 	//==============================================================
 	// Regenerate Health & Mana
 	//==============================================================
@@ -82,8 +86,8 @@ public class HealthSystemGUI : MonoBehaviour
 			}
 			else
 			{
-				HealDamage(regen);
-				RestoreMana(regen);				
+				HealDamage(healthRegen);
+				RestoreMana(manaRegen);				
 			}
 
 			UpdateGraphics();
@@ -126,6 +130,14 @@ public class HealthSystemGUI : MonoBehaviour
 
 		UpdateGraphics();
 	}
+
+	public void SetHealthRegen(float input){
+		healthRegen += input;
+	}
+	public void SetManaRegen(float input){
+		manaRegen += input;
+	}
+	
 	public void SetMaxHealth(float input){
 		maxHealth = input;
 

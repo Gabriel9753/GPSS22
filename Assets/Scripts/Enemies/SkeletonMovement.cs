@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class SkeletonMovement : MonoBehaviour
 {
-    // Start is called before the first frame update
+    [SerializeField] private List<Ability> all_abilities;
     void Start()
     {
         
