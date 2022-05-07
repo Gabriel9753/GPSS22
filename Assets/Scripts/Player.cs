@@ -1,13 +1,18 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using UnityEditor;
 using UnityEngine;
 using UnityEngine.AI;
 
 public class Player : MonoBehaviour{
-    private Animator _animator;
-    private NavMeshAgent _agent;
+    public Animator animator;
+    public NavMeshAgent _agent;
     private new Camera camera;
+    public GameObject weapon;
+    public Vector3 destination;
+    
+    public float agentSpeed;
     
     #region Singleton
 
@@ -16,8 +21,10 @@ public class Player : MonoBehaviour{
     void Awake ()
     {
         instance = this;
-        _animator = instance.GetComponent<Animator>();
+        animator = instance.GetComponent<Animator>();
         _agent = instance.GetComponent<NavMeshAgent>();
+        destination = _agent.destination;
+
     }
 
     #endregion
@@ -33,59 +40,64 @@ public class Player : MonoBehaviour{
     #region Check animation states from player
 
     public bool isAttacking(){
-        if (_animator.GetCurrentAnimatorStateInfo(0).IsName("Normal_Attack_1"))
+        if (animator.GetCurrentAnimatorStateInfo(0).IsName("Normal_Attack_1"))
             return true;
-        if (_animator.GetCurrentAnimatorStateInfo(0).IsName("Normal_Attack_2"))
+        if (animator.GetCurrentAnimatorStateInfo(0).IsName("Normal_Attack_2"))
             return true;
-        if (_animator.GetCurrentAnimatorStateInfo(0).IsName("Normal_Attack_3"))
+        if (animator.GetCurrentAnimatorStateInfo(0).IsName("Normal_Attack_3"))
             return true;
-        if (_animator.GetCurrentAnimatorStateInfo(0).IsName("RunAttack"))
+        if (animator.GetCurrentAnimatorStateInfo(0).IsName("RunAttack"))
             return true;
         return false;
     }
 
     public bool standAttack(){
-        if (_animator.GetCurrentAnimatorStateInfo(0).IsName("Normal_Attack_1"))
+        if (animator.GetCurrentAnimatorStateInfo(0).IsName("Normal_Attack_1"))
             return true;
-        if (_animator.GetCurrentAnimatorStateInfo(0).IsName("Normal_Attack_2"))
+        if (animator.GetCurrentAnimatorStateInfo(0).IsName("Normal_Attack_2"))
             return true;
-        if (_animator.GetCurrentAnimatorStateInfo(0).IsName("Normal_Attack_3"))
+        if (animator.GetCurrentAnimatorStateInfo(0).IsName("Normal_Attack_3"))
             return true;
         return false;
     }
     public bool moveAttack(){
-        if (_animator.GetCurrentAnimatorStateInfo(0).IsName("RunAttack"))
+        if (animator.GetCurrentAnimatorStateInfo(0).IsName("RunAttack"))
             return true;
         return false;
     }
     
     
     public bool isRunning(){
-        if (_animator.GetCurrentAnimatorStateInfo(0).IsName("Run"))
+        if (animator.GetCurrentAnimatorStateInfo(0).IsName("Run"))
             return true;
         return false;
     }
     
     public bool isDashing(){
-        if (_animator.GetCurrentAnimatorStateInfo(0).IsName("Dash"))
+        if (animator.GetCurrentAnimatorStateInfo(0).IsName("Dash"))
             return true;
         return false;
     }
 
     public bool isHit(){
-        if (_animator.GetCurrentAnimatorStateInfo(0).IsName("playerHit"))
+        if (animator.GetCurrentAnimatorStateInfo(0).IsName("playerHit"))
             return true;
         return false;
     }
 
+    public bool isChannelingAbility(){
+        //TODO
+        return false;
+    }
+
     public String GetSpeedMultiplierName(){
-        if (_animator.GetCurrentAnimatorStateInfo(0).IsName("Normal_Attack_1"))
+        if (animator.GetCurrentAnimatorStateInfo(0).IsName("Normal_Attack_1"))
             return "Normal1";
-        if (_animator.GetCurrentAnimatorStateInfo(0).IsName("Normal_Attack_2"))
+        if (animator.GetCurrentAnimatorStateInfo(0).IsName("Normal_Attack_2"))
             return "Normal2";
-        if (_animator.GetCurrentAnimatorStateInfo(0).IsName("Normal_Attack_3"))
+        if (animator.GetCurrentAnimatorStateInfo(0).IsName("Normal_Attack_3"))
             return "Normal3";
-        if (_animator.GetCurrentAnimatorStateInfo(0).IsName("RunAttack"))
+        if (animator.GetCurrentAnimatorStateInfo(0).IsName("RunAttack"))
             return "run Attack";
         
         //ADD NEW ATTACK OR ABILITY HERE
@@ -94,13 +106,13 @@ public class Player : MonoBehaviour{
     }
     
     public String GetAnimationName(){
-        if (_animator.GetCurrentAnimatorStateInfo(0).IsName("Normal_Attack_1"))
+        if (animator.GetCurrentAnimatorStateInfo(0).IsName("Normal_Attack_1"))
             return "Normal_Attack_1";
-        if (_animator.GetCurrentAnimatorStateInfo(0).IsName("Normal_Attack_2"))
+        if (animator.GetCurrentAnimatorStateInfo(0).IsName("Normal_Attack_2"))
             return "Normal_Attack_2";
-        if (_animator.GetCurrentAnimatorStateInfo(0).IsName("Normal_Attack_3"))
+        if (animator.GetCurrentAnimatorStateInfo(0).IsName("Normal_Attack_3"))
             return "Normal_Attack_3";
-        if (_animator.GetCurrentAnimatorStateInfo(0).IsName("RunAttack"))
+        if (animator.GetCurrentAnimatorStateInfo(0).IsName("RunAttack"))
             return "RunAttack";
         
         //ADD NEW ATTACK OR ABILITY HERE
@@ -117,12 +129,16 @@ public class Player : MonoBehaviour{
         return this.camera;
     }
     public Animator getAnimator(){
-        return _animator;
+        return animator;
     }
     
     public NavMeshAgent Agent{
         get => _agent;
         set => _agent = value;
+    }
+    public GameObject Weapon{
+        get => weapon;
+        set => weapon = value;
     }
 
     public void PlayerToMouseRotation(){

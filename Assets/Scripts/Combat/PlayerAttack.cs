@@ -7,19 +7,16 @@ using UnityEngine.UI;
 
 public class PlayerAttack : MonoBehaviour{
     //For later initializing
-    public GameObject weapon;
+    private GameObject weapon;
     private BoxCollider _boxCollider;
     private Animator _animator;
     private NavMeshAgent _agent;
-    
     private new Camera camera;
     private RaycastHit hit;
     public int maxDistance = 70;
     public LayerMask moveMask;
     private Vector3 destination;
-    public GameObject projectile;
-    private float projectileSpeed = 15;
-
+    
     private bool checkRunAttack;
     
     
@@ -27,6 +24,7 @@ public class PlayerAttack : MonoBehaviour{
     // Called when a script is enabled
     void Start(){
         //Get collider from held weapon
+        weapon = Player.instance.weapon;
         _boxCollider = weapon.GetComponent<BoxCollider>();
         _animator = Player.instance.getAnimator();
         _agent = GetComponent<NavMeshAgent>();
@@ -66,27 +64,9 @@ public class PlayerAttack : MonoBehaviour{
                 checkRunAttack = true;
             }
         }
-        
-        //Shoot Fireball
-        if (Input.GetKeyDown("w") && camera && !Player.instance.isHit()){
-            _agent.ResetPath();
-            Player.instance.PlayerToMouseRotation();
-            
-            Ray ray = camera.ScreenPointToRay(Input.mousePosition);
-            if (Physics.Raycast(ray, out hit, maxDistance, moveMask)){
-                destination = hit.point;
-                InstantiateProjectile(weapon.transform);
-            }
-        }
     }
 
-    void InstantiateProjectile(Transform origin){
-        Vector2 positionOnScreen = camera.WorldToViewportPoint (transform.position);
-        Vector2 mouseOnScreen = camera.ScreenToViewportPoint(Input.mousePosition);
-        float angle = AngleBetweenTwoPoints(positionOnScreen, mouseOnScreen);
-        var projectileObj = Instantiate(projectile, origin.position, Quaternion.Euler (new Vector3(0f,transform.position.y-angle+225,0f)));
-        projectileObj.GetComponent<Rigidbody>().velocity = (new Vector3(destination.x,origin.position.y,destination.z) - origin.position).normalized * projectileSpeed;
-    }
+
     public void startAttack(){
         _boxCollider.enabled = true;
     }
@@ -94,11 +74,7 @@ public class PlayerAttack : MonoBehaviour{
     public void endAttack(){
         _boxCollider.enabled = false;
     }
-
-    float AngleBetweenTwoPoints(Vector3 a, Vector3 b) {
-        return Mathf.Atan2(a.y - b.y, a.x - b.x) * Mathf.Rad2Deg;
-    }
-
+    
     public void GotHit(float damage){
         _animator.Play("playerHit");
         Player.instance.GetComponent<PlayerStats>().TakeDamage(damage);
