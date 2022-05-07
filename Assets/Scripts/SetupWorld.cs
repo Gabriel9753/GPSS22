@@ -19,7 +19,7 @@ public class SetupWorld : MonoBehaviour
         worldManager.newRoom = Instantiate(worldManager.entryRoom, position: new Vector3(0,0, 0), Quaternion.identity);
         worldManager.entrance = GameObject.FindWithTag("Entrance");
         Transform position = worldManager.entrance.transform;
-        Instantiate(player);
+            Instantiate(player);
         Player.instance.GetComponent<PlayerMovement>().setCamera(camera);
         Player.instance.setCamera(camera);
         /*for (int i = 0; i < enemies.Length; i++)
