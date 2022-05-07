@@ -12,10 +12,8 @@ public class PlayerStats : MonoBehaviour{
     public float health = 100;	// Current amount of health
     public float mana = 100;
     private static bool called = false;
-    public GameObject healthUI;
-    
-    
-    
+
+
     public float baseDamage = 1;
     public float sumDamage = 1;
     
