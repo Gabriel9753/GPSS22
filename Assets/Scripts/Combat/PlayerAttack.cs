@@ -7,79 +7,95 @@ using UnityEngine.UI;
 
 public class PlayerAttack : MonoBehaviour{
     //For later initializing
-    private GameObject weapon;
+    public GameObject weapon;
     private BoxCollider _boxCollider;
     private Animator _animator;
     private NavMeshAgent _agent;
-    private new Camera camera;
+    
+    private Camera camera;
     private RaycastHit hit;
     public int maxDistance = 70;
     public LayerMask moveMask;
     private Vector3 destination;
-    
-    private bool checkRunAttack;
-    
-    
+    public GameObject projectile;
+    private float projectileSpeed = 15;
     
     // Called when a script is enabled
     void Start(){
         //Get collider from held weapon
-        weapon = Player.instance.weapon;
         _boxCollider = weapon.GetComponent<BoxCollider>();
         _animator = Player.instance.getAnimator();
         _agent = GetComponent<NavMeshAgent>();
         camera = Player.instance.getCamera();
-        checkRunAttack = false;
     }
     
     // Called once every frame
     void Update(){
+        
         if(Player.instance.standAttack()) 
             _animator.SetBool("isRunToNormal", false);
-        if (checkRunAttack && !Player.instance.moveAttack() && !Player.instance.isDashing()){
-            _agent.ResetPath();
-            checkRunAttack = false;
-        }
-
-            //Right click for attack animation and not running
-        if (Input.GetMouseButtonDown(1) && !Player.instance.isRunning() && !Player.instance.isDashing() && !Player.instance.isHit()){
-            if (!Player.instance.moveAttack()){
-                _agent.ResetPath();
-                Player.instance.GetComponent<PlayerCombo>().NormalAttack();
+        
+        //Right click for attack animation and not running
+        if (Input.GetMouseButtonDown(1) && !Player.instance.isRunning()){
+            if (Player.instance.moveAttack() && _animator){
+                if (_animator.GetCurrentAnimatorStateInfo(0).normalizedTime > 0.5f){
+                    _animator.SetBool("isRunToNormal", true);
+                }
             }
+            if(!Player.instance.moveAttack())
+                Player.instance.GetComponent<PlayerCombo>().NormalAttack();
         }
 
         
         //When running -> other attack animation
-        if (Input.GetMouseButtonDown(1) && Player.instance.isRunning() && !Player.instance.isHit()){
+        if (Input.GetMouseButtonDown(1) && Player.instance.isRunning()){
             //Dash Attack
             if (_agent && _animator){
-                Player.instance.PlayerToMouseRotation();
-                _agent.ResetPath();
                 _animator.Play("RunAttack");
                 float alpha = (float)((transform.rotation.eulerAngles.y % 360) * Math.PI)/180;
                 Vector3 forward = new Vector3((float)Math.Sin(alpha), 0, (float)Math.Cos(alpha));
-                Vector3 newDestination = transform.position + forward * (3f);
+                Vector3 newDestination = transform.position + forward * (2f);
                 _agent.SetDestination(newDestination);
-                checkRunAttack = true;
+            }
+        }
+        
+        //Shoot Fireball
+        if (Input.GetKeyDown("w") && camera){
+            Vector2 positionOnScreen = camera.WorldToViewportPoint (transform.position);
+            Vector2 mouseOnScreen = camera.ScreenToViewportPoint(Input.mousePosition);
+            float angle = AngleBetweenTwoPoints(positionOnScreen, mouseOnScreen);
+            transform.rotation =  Quaternion.Euler (new Vector3(0f,transform.rotation.y-angle-45,0f));
+            
+            Ray ray = camera.ScreenPointToRay(Input.mousePosition);
+            if (Physics.Raycast(ray, out hit, maxDistance, moveMask)){
+                destination = hit.point;
+                InstantiateProjectile(weapon.transform);
             }
         }
     }
 
 
-    public void startAttack(){
+    void InstantiateProjectile(Transform origin){
+        Vector2 positionOnScreen = camera.WorldToViewportPoint (transform.position);
+        Vector2 mouseOnScreen = camera.ScreenToViewportPoint(Input.mousePosition);
+        float angle = AngleBetweenTwoPoints(positionOnScreen, mouseOnScreen);
+        var projectileObj = Instantiate(projectile, origin.position, Quaternion.Euler (new Vector3(0f,transform.position.y-angle+225,0f))) as GameObject;
+        //  print("proj position: " +projectileObj.transform.position +" desti: "+destination);
+        projectileObj.GetComponent<Rigidbody>().velocity = (new Vector3(destination.x,origin.position.y,destination.z) - origin.position).normalized * projectileSpeed;
+    }
+    public void startAttack()
+    {
         _boxCollider.enabled = true;
     }
 
-    public void endAttack(){
+    public void endAttack()
+    {
         _boxCollider.enabled = false;
     }
-    
-    public void GotHit(float damage){
-        _animator.Play("playerHit");
-        Player.instance.GetComponent<PlayerStats>().TakeDamage(damage);
-        Player.instance.GetComponent<PlayerCombo>().ResetCombo();
+
+    float AngleBetweenTwoPoints(Vector3 a, Vector3 b) {
+        return Mathf.Atan2(a.y - b.y, a.x - b.x) * Mathf.Rad2Deg;
     }
-    
-    
+
+
 }

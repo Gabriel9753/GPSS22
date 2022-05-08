@@ -3,16 +3,15 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using Unity.UI;
+using UnityEditor.Build.Content;
 using UnityEngine.PlayerLoop;
 using UnityEngine.UI;
 
 public class XP_UI : MonoBehaviour
 {
-    private int level;
+    public int level;
     public float currentXP;
     public float maxXP;
-
-    private PlayerStats stats;
     
     public GameObject xpBar;
     public Text levelText;
@@ -30,11 +29,6 @@ public class XP_UI : MonoBehaviour
     }
     #endregion
 
-    private void Start(){
-        stats = Player.instance.GetComponent<PlayerStats>();
-        level = stats.level;
-    }
-
     private float calculateMaxXP(){
         float max_XP = 25 * level + 100;
         return max_XP;
@@ -50,12 +44,12 @@ public class XP_UI : MonoBehaviour
     private void levelUp(){
         float overflowXP = currentXP - maxXP;
         level++;
-        stats.level++;
         levelText.GetComponent<Text>().text = "- Level " + level + " -";
         currentXP = overflowXP;
         maxXP = calculateMaxXP();
         xpBar.GetComponent<Slider>().maxValue = calculateMaxXP();
         xpBar.GetComponent<Slider>().value = currentXP;
+        UpManager.instance.LevelUpped();
         LevelUpUpgradesUI.Instance.ActivateUI();
     }
 
@@ -95,8 +89,41 @@ public class XP_UI : MonoBehaviour
         xpText.enabled = false;
         yield return null;
     }
+    
+    
+    public void SelectedUpgradeAfterLevelUp(int button){
+        Upgrade upgrade = UpManager.selected_upgrades[button];
+        
+        string uptype = upgrade.GetType().Name;
+        print(uptype);
+        switch (uptype){
+            case "GoldUpgrade":
+                Player.instance.GetComponent<PlayerStats>().IncreaseGold(System.Convert.ToByte(upgrade.value));
+                break; 
+            case "GoldMultiplierUpgrade":
+                Player.instance.GetComponent<PlayerStats>().IncreaseGold_Multiplier(upgrade.value);
+                break;
+            case "HealthUpgrade":
+                Player.instance.GetComponent<PlayerStats>().IncreaseMaxHealth(upgrade.value);
+                break;
+            case "HealthRegenUpgrade":
+                Player.instance.GetComponent<PlayerStats>().IncreaseHealthRegen(upgrade.value);
+                break;
+            case "ManaUpgrade":
+                Player.instance.GetComponent<PlayerStats>().IncreaseMaxMana(upgrade.value);
+                break;
+            case "ManaRegenUpgrade":
+                Player.instance.GetComponent<PlayerStats>().IncreaseManaRegen(upgrade.value);
+                break;
+            case "EXPMultiplierUpgrade":
+                Player.instance.GetComponent<PlayerStats>().IncreaseEXP_Multiplier(upgrade.value);
+                break;
+            
+            
 
-    public void selectedUpgradeAfterLevelUp(){
+        }
         updateUI();
     }
+
+
 }

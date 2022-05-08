@@ -2,10 +2,11 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
+using UnityEngine.UI;
 
 public class Ability : ScriptableObject{
     public string name;
-    public Sprite symbol;
+    public Image symbol;
     public float activeTime;
     public float cooldownTime;
     public KeyCode key;

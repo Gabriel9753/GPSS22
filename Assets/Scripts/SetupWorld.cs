@@ -11,7 +11,7 @@ public class SetupWorld : MonoBehaviour
     public static WorldManager worldManager;
     public GameObject[] enemies;
     public GameObject player;
-    public Camera camera;
+    public new Camera camera;
     public static GameObject newRoom;
     // Start is called before the first frame update
     void Awake(){
@@ -22,14 +22,14 @@ public class SetupWorld : MonoBehaviour
         Instantiate(player);
         Player.instance.GetComponent<PlayerMovement>().setCamera(camera);
         Player.instance.setCamera(camera);
-        /*for (int i = 0; i < enemies.Length; i++)
+        for (int i = 0; i < enemies.Length; i++)
         {
             Instantiate(enemies[i]);
-            enemies[i].GetComponent<NavMeshAgent>().enabled = true;
-        }*/
+        }
         Player.instance.transform.position = position.position;
         Player.instance.GetComponent<NavMeshAgent>().enabled = true;
-        Ability.camera = camera;
-        Ability.playerAgent = Player.instance.Agent;
     }
+    
+    
+    
 }
